@@ -1,5 +1,7 @@
 package main;
 
-public class ProjectView implements View {
+import javax.swing.JPanel;
+
+public class ProjectView extends JPanel {
 	// View Project Information
 }

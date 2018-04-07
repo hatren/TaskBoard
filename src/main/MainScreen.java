@@ -1,5 +1,7 @@
 package main;
 
-public class MainScreen {
+import javax.swing.JPanel;
+
+public class MainScreen extends JPanel {
 
 }

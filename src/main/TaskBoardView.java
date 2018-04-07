@@ -1,5 +1,7 @@
 package main;
 
-public class TaskBoardView implements View{
+import javax.swing.JPanel;
+
+public class TaskBoardView extends JPanel{
 
 }
