@@ -15,26 +15,17 @@ public class TaskView extends JPanel {
 	
 	// Constructor
 	public TaskView(TaskModel model) {
+		// Initialize
 		this.model = model;
 		name = new JTextArea();
 		description = new JTextArea();
 		date = new JTextArea();
-		
-		// Initialize
 		setData();
 		
 		// Add to Frame
 		this.add(name);
 		this.add(description);
 		this.add(date);
-	}
-	
-	// Set data for TextAreas
-	public void setData(){
-		this.status = model.getStatus();
-		name.setText(model.getName());
-		description.setText(model.getDescription());
-		date.setText(model.getDate().toString());
 	}
 	
 	// Return all TextAreas
@@ -48,5 +39,13 @@ public class TaskView extends JPanel {
 	
 	public TaskModel getModel() {
 		return this.model;
+	}
+	
+	// Set data for TextAreas
+	public void setData(){
+		this.status = model.getStatus();
+		name.setText(model.getName());
+		description.setText(model.getDescription());
+		date.setText(model.getDate().toString());
 	}
 }
