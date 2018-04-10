@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class TaskModel implements Comparable<TaskModel>{
 	// Variables
-	String name;
-	String description;
-	Date dueDate;
-	String status;
+	private String name;
+	private String description;
+	private Date dueDate;
+	private String status;
 	
 	// Constructor
 	public TaskModel(String name, String description, Date dueDate, String status) {
@@ -26,9 +26,7 @@ public class TaskModel implements Comparable<TaskModel>{
 		else if(dueDate.after(arg0.dueDate)) {
 			return 1;
 		}
-		else {
-			return 0;
-		}
+		else return this.name.compareTo(arg0.getName());
 	}
 	
 	// Getters

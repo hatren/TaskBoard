@@ -20,11 +20,13 @@ public class ProjectModel {
 		this.name = name;
 	}
 	
+	// Add new Progress type
 	public void addProgress(ProgressModel progress) {
 		progressList.add(progress);
 		Collections.sort(progressList);
 	}
 	
+	// Remove old Progress type
 	public void removeProgress(ProgressModel progress) {
 		progressList.remove(progress);
 		Collections.sort(progressList);

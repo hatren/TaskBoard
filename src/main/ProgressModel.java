@@ -5,29 +5,33 @@ import java.util.Collections;
 
 public class ProgressModel implements Comparable<ProgressModel>{
 	// Variables
-	String name;
-	int priority;
-	ArrayList<TaskModel> taskList;
+	private String status;
+	private int priority;
+	private ArrayList<TaskModel> taskList;
 	
 	// Constructor
 	public ProgressModel(String name, int priority) {
-		this.name = name;
+		this.status = name;
 		this.priority = priority;
 		taskList = new ArrayList<TaskModel>();
 	}
 	
 	// Getters
-	public String getName() {
-		return name;
+	public String getStatus() {
+		return status;
 	}
 	
 	public int getPriority() {
 		return priority;
 	}
 	
+	public ArrayList<TaskModel> getTaskList(){
+		return taskList;
+	}
+	
 	// Setters
-	public void setName(String name) {
-		this.name = name;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	public void setPriority(int priority) {
