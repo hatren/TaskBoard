@@ -17,10 +17,11 @@ public class ProgressView extends JPanel{
 		this.model = model;
 		
 		// Add Status Text
-		this.add(new JTextArea(model.getStatus()));
+		status = new JTextArea(model.getStatus());
+		this.add(status);
 		
 		// Add TaskViews
-		for(TaskModel task: model.getTaskList()) {
+		for(TaskModel task: this.model.getTaskList()) {
 			TaskView taskView = new TaskView(task);
 			taskList.add(taskView);
 			this.add(taskView);
@@ -28,7 +29,12 @@ public class ProgressView extends JPanel{
 	}
 	
 	// addTask
-	
+	public void addTask(TaskView view) {
+		this.add(view);
+	}
 	
 	// removeTask
+	public void removeTask(TaskView view) {
+		this.remove(view);
+	}
 }

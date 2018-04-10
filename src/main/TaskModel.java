@@ -16,19 +16,7 @@ public class TaskModel implements Comparable<TaskModel>{
 		this.dueDate = dueDate;
 		this.status = status;
 	}
-	
-	// compareTo for Comparable
-	@Override
-	public int compareTo(TaskModel arg0) {
-		if(dueDate.before(arg0.dueDate)) {
-			return -1;
-		}
-		else if(dueDate.after(arg0.dueDate)) {
-			return 1;
-		}
-		else return this.name.compareTo(arg0.getName());
-	}
-	
+
 	// Getters
 	public String getName() {
 		return name;
@@ -61,5 +49,17 @@ public class TaskModel implements Comparable<TaskModel>{
 	
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	// For sort()
+	@Override
+	public int compareTo(TaskModel arg0) {
+		if(dueDate.before(arg0.dueDate)) {
+			return -1;
+		}
+		else if(dueDate.after(arg0.dueDate)) {
+			return 1;
+		}
+		else return this.name.compareTo(arg0.getName());
 	}
 }

@@ -50,6 +50,7 @@ public class ProgressModel implements Comparable<ProgressModel>{
 		Collections.sort(taskList);
 	}
 
+	// For sort()
 	@Override
 	public int compareTo(ProgressModel arg0) {
 		if(this.getPriority() > arg0.getPriority()) {
