@@ -52,7 +52,6 @@ public class TaskModel implements Comparable<TaskModel>{
 	}
 	
 	// For sort()
-	@Override
 	public int compareTo(TaskModel arg0) {
 		if(dueDate.before(arg0.dueDate)) {
 			return -1;
