@@ -4,22 +4,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ProjectModel {
-	String name;
-	ArrayList<ProgressModel> progressList;
+	// Variables
+	private String name;
+	private ArrayList<ProgressModel> progressList;
 	
+	// Constructor
 	public ProjectModel(String name) {
 		this.name = name;
 		progressList = new ArrayList<ProgressModel>();
 	}
 	
+	// Getters
 	public String getName() {
 		return name;
 	}
 	
+	public ArrayList<ProgressModel> getProgressList(){
+		return progressList;
+	}
+	
+	// Setters
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	// Add new Progress type
 	public void addProgress(ProgressModel progress) {
 		progressList.add(progress);

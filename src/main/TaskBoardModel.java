@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class TaskBoardModel {
 	// Variables
-	String name;
-	String fileName;
-	ArrayList<ProjectModel> projectList;
+	private String name;
+	private String fileName;
+	private ArrayList<ProjectModel> projectList;
 	
 	// Constructor
 	public TaskBoardModel(String name, String fileName) {

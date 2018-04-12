@@ -5,5 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public class TaskBoardView extends JPanel{
-	ArrayList<ProjectView> projectList;
+	private TaskBoardModel model;
+	
+	public TaskBoardView(TaskBoardModel model) {
+		this.model = model;
+	}
 }

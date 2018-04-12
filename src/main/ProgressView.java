@@ -18,23 +18,23 @@ public class ProgressView extends JPanel{
 		
 		// Add Status Text
 		status = new JTextArea(model.getStatus());
-		this.add(status);
+		add(status);
 		
 		// Add TaskViews
 		for(TaskModel task: this.model.getTaskList()) {
-			TaskView taskView = new TaskView(task);
-			taskList.add(taskView);
-			this.add(taskView);
+			addTask(new TaskView(task));
 		}
 	}
 	
 	// addTask
 	public void addTask(TaskView view) {
-		this.add(view);
+		taskList.add(view);
+		add(view);
 	}
 	
 	// removeTask
 	public void removeTask(TaskView view) {
-		this.remove(view);
+		taskList.remove(view);
+		remove(view);
 	}
 }

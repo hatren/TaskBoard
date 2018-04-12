@@ -41,6 +41,10 @@ public class TaskView extends JPanel {
 		return this.model;
 	}
 	
+	public String getStatus() {
+		return this.status;
+	}
+	
 	// Set data for TextAreas
 	public void setData(){
 		this.status = model.getStatus();
