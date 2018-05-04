@@ -33,6 +33,10 @@ public class TaskBoardModel {
 		this.fileName = fileName;
 	}
 	
+	public ArrayList<ProjectModel> getProjectList() {
+		return projectList;
+	}
+	
 	public void addProject(ProjectModel project) {
 		projectList.add(project);
 	}

@@ -22,7 +22,7 @@ public class LoginView extends JPanel{
 	private JTextArea usernameEdit;
 	private JLabel passwordTitle;
 	private JTextArea passwordEdit;
-
+	
 	// Constructor
 	public LoginView() {
 		// ***Needs Formatting***
@@ -37,6 +37,7 @@ public class LoginView extends JPanel{
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				loginCheck();
+				
 			}
 		});
 		add(loginButton, BorderLayout.SOUTH);
@@ -71,7 +72,6 @@ public class LoginView extends JPanel{
 		if("admin".equals(usernameEdit.getText()) && "admin".equals(passwordEdit.getText())) {
 			// Do something
 			// Maybe send a boolean to a controller or something
-			
 			// test
 			mainTitle.setText("Success");
 		}
@@ -79,5 +79,6 @@ public class LoginView extends JPanel{
 			mainTitle.setText("Fail");
 		}
 	}
+	
 	
 }
