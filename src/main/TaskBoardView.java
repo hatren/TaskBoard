@@ -45,10 +45,6 @@ public class TaskBoardView extends JPanel{
 		add(addProjectButton, BorderLayout.SOUTH);
 	}
 	
-	public TaskBoardView(TaskBoardModel model) {
-		this.model = model;
-	}
-	
 	public void addProject(ProjectModel model) {
 		this.model.addProject(model);
 		ProjectView projectView = new ProjectView(model);
