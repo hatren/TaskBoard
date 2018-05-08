@@ -1,9 +1,13 @@
 package main;
 
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 public class TaskView extends JPanel {
 	// Variables
@@ -17,15 +21,28 @@ public class TaskView extends JPanel {
 	public TaskView(TaskModel model) {
 		// Initialize
 		this.model = model;
+		
+		Border border = BorderFactory.createEtchedBorder();
+		
 		name = new JTextArea();
+		name.setBorder(border);
+		
 		description = new JTextArea();
+		description.setBorder(border);
+		
 		date = new JTextArea();
+		date.setBorder(border);
+		
 		setData();
 		
-		// Add to Frame
+		// Add to Panel
+		setLayout(new GridLayout(3,1));
 		this.add(name);
 		this.add(description);
 		this.add(date);
+		
+		// Add Border
+		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	// Return all TextAreas
@@ -50,6 +67,6 @@ public class TaskView extends JPanel {
 		this.status = model.getStatus();
 		name.setText(model.getName());
 		description.setText(model.getDescription());
-		date.setText(model.getDate().toString());
+		date.setText(model.getDate().DAY_OF_MONTH + "/" + model.getDate().MONTH + "/" + model.getDate().YEAR);
 	}
 }

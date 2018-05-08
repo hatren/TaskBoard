@@ -46,14 +46,14 @@ public class LoginView extends JPanel{
 		mainTitle.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 0));
 		add(mainTitle, BorderLayout.NORTH);
 		
-		loginButton = new JButton("Login");
-		loginButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				loginCheck();
-				
-			}
-		});
-		add(loginButton, BorderLayout.SOUTH);
+//		loginButton = new JButton("Login");
+//		loginButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				loginCheck();
+//				
+//			}
+//		});
+//		add(loginButton, BorderLayout.SOUTH);
 		
 		login = new JPanel();
 		login.setLayout(null);

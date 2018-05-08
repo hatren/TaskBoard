@@ -1,16 +1,16 @@
 package main;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class TaskModel implements Comparable<TaskModel>{
 	// Variables
 	private String name;
 	private String description;
-	private Date dueDate;
+	private Calendar dueDate;
 	private String status;
 	
 	// Constructor
-	public TaskModel(String name, String description, Date dueDate, String status) {
+	public TaskModel(String name, String description, Calendar dueDate, String status) {
 		this.name = name;
 		this.description = description;
 		this.dueDate = dueDate;
@@ -26,7 +26,7 @@ public class TaskModel implements Comparable<TaskModel>{
 		return description;
 	}
 	
-	public Date getDate() {
+	public Calendar getDate() {
 		return dueDate;
 	}
 	
@@ -43,7 +43,7 @@ public class TaskModel implements Comparable<TaskModel>{
 		this.description = description;
 	}
 	
-	public void setDate(Date dueDate) {
+	public void setDate(Calendar dueDate) {
 		this.dueDate = dueDate;
 	}
 	

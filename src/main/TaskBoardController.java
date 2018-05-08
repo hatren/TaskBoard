@@ -4,10 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class TaskBoardController {
-	TaskBoardModel model;
-	TaskBoardView view;
-	ObjectInputStream in;
-	ObjectOutputStream out;
+	private TaskBoardModel model;
+	private TaskBoardView view;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
+	
 	public TaskBoardController(TaskBoardModel taskBoard){
 		model = taskBoard;
 	}

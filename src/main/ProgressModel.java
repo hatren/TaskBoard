@@ -10,8 +10,8 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	private ArrayList<TaskModel> taskList;
 	
 	// Constructor
-	public ProgressModel(String name, int priority) {
-		this.status = name;
+	public ProgressModel(String status, int priority) {
+		this.status = status;
 		this.priority = priority;
 		taskList = new ArrayList<TaskModel>();
 	}
