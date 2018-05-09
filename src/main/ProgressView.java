@@ -1,20 +1,24 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	// Variables
 	private ProgressModel model;
 	private ArrayList<TaskView> taskList;
-	private JTextArea status;
+	private JTextField status;
 	private JButton addTaskButton;
 	
 	// Constructor
@@ -23,13 +27,23 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		this.model = model;
 		
 		// Add Status Text
-		status = new JTextArea(model.getStatus());
+		status = new JTextField(model.getStatus());
 		add(status);
 		
 		// Add TaskViews
 		taskList = new ArrayList<TaskView>();
+//		for(TaskModel task: this.model.getTaskList()) {
+//			addTask(task);
+//		}
+		/*
 		for(TaskModel task: this.model.getTaskList()) {
 			addTask(task);
+		}*/
+		taskList = new ArrayList<TaskView>();
+		for(int i = 0; i < this.model.getTaskList().size(); i++) {
+			TaskView taskView = new TaskView(this.model.getTaskList().get(i));
+			taskList.add(taskView);
+			add(taskView);
 		}
 		
 		addTaskButton = new JButton();
@@ -70,9 +84,21 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		return model;
 	}
 	
-	//TODO Implement this. Might need a way to search.
 	// removeTask
-	public void removeTask(TaskView view) {
+	public void removeTask(TaskView task) {
+		// Remove Views From JPanel
+		for(TaskView view: taskList) {
+			this.remove(view);
+		}
+		
+		// Remove and Sort ArrayList
+		taskList.remove(task);
+		Collections.sort(taskList);
+		
+		// Add all
+		for(TaskView view: taskList) {
+			this.add(view);
+		}
 	}
 
 	@Override

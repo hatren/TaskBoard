@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,7 +26,7 @@ public class ProjectView extends JPanel {
 		
 		// Add Name Text
 		name = new JTextArea(model.getName());
-		add(name);
+		/* add(name);
 		
 		// Add ProgressViews
 		for(ProgressModel progress: this.model.getProgressList()) {
@@ -42,7 +43,10 @@ public class ProjectView extends JPanel {
 		add(addProgressButton);
 		
 		// Test Border
-		this.setBorder(BorderFactory.createRaisedBevelBorder());
+		this.setBorder(BorderFactory.createRaisedBevelBorder()); */ 
+		
+		JPanel project = new JPanel();
+		project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
 	}
 	
 	// addTask
@@ -65,8 +69,19 @@ public class ProjectView extends JPanel {
 	}
 	
 	// removeTask
-	public void removeProgress(ProgressView view) {
-		progressList.remove(view);
-		remove(view);
+	public void removeProgress(ProgressView removed) {
+		// Remove All From JPanel
+		for(ProgressView progress: progressList) {
+			this.remove(progress);
+		}
+			
+		// Remove and Sort ArrayList
+		progressList.remove(removed);
+		Collections.sort(progressList);
+				
+		// Add All to JPanel
+		for(ProgressView progress: progressList) {
+			this.add(progress);
+		}
 	}
 }

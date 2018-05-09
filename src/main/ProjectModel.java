@@ -34,6 +34,10 @@ public class ProjectModel {
 		Collections.sort(progressList);
 	}
 	
+	public int progressSize() {
+		return progressList.size();
+	}
+	
 	// Remove old Progress type
 	public void removeProgress(ProgressModel progress) {
 		progressList.remove(progress);
