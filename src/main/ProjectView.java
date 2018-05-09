@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class ProjectView extends JPanel {
 		
 		// Add Name Text
 		name = new JTextArea(model.getName());
-		add(name);
+		/* add(name);
 		
 		// Add ProgressViews
 		for(ProgressModel progress: this.model.getProgressList()) {
@@ -41,7 +42,10 @@ public class ProjectView extends JPanel {
 		add(addProgressButton);
 		
 		// Test Border
-		this.setBorder(BorderFactory.createRaisedBevelBorder());
+		this.setBorder(BorderFactory.createRaisedBevelBorder()); */ 
+		
+		JPanel project = new JPanel();
+		project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
 	}
 	
 	// addTask

@@ -12,15 +12,17 @@ public class MainScreen extends JPanel {
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
-		
-		
-		TaskBoardView taskboardView = new TaskBoardView();
-		LoginView loginView = new LoginView(frame, taskboardView);
-		
 		frame.setLayout(new CardLayout());
 		frame.setSize(900, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		TaskBoardView taskboardView = new TaskBoardView();
+		frame.add(taskboardView);
+		
+		
+		/*
+		LoginView loginView = new LoginView(frame, taskboardView);
+		
 		
 		frame.getContentPane().add(loginView, "Card 1");
 		while(loginView.isAuthenticated() == false) {
@@ -30,7 +32,7 @@ public class MainScreen extends JPanel {
 		frame.getContentPane().removeAll();
 		
 		//TaskBoardController controller = new TaskBoardController()
-		frame.add(taskboardView, "Card 2");
+		frame.add(taskboardView, "Card 2"); */
 		
 		
 		

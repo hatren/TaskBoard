@@ -2,11 +2,15 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -49,22 +53,12 @@ public class TaskBoardView extends JPanel{
 		mainTitle = new JLabel("Task Board View");
 		mainTitle.setHorizontalAlignment(JLabel.CENTER);
 		mainTitle.setVerticalAlignment(JLabel.CENTER);
-		//mainTitle.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 0));
 		add(mainTitle);
-		
-		// addProjectButton
-		/*addProjectButton = new JButton("Add Project");
-		addProjectButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Add Project
-				String name = JOptionPane.showInputDialog("Enter a name for the new project");
-				addProject(new ProjectModel(name));
-			}
-		}); */
-		//add(addProjectButton, BorderLayout.SOUTH);
 		
 		toolbar = new JPanel();
 		toolbar.setLayout(new FlowLayout());
+		toolbar.setBackground(Color.PINK);
+		toolbar.setMaximumSize(new Dimension(900, 50));
 		add(toolbar, BorderLayout.CENTER);
 
 		selectProject = new JLabel("Select Project: ");
@@ -157,14 +151,9 @@ public class TaskBoardView extends JPanel{
 		JPanel pan = new JPanel();
 		BoxLayout boxlayout2 = new BoxLayout(pan, BoxLayout.X_AXIS);
 		pan.setLayout(boxlayout2);
-		/*JTextField text = new JTextField("Hello World");
-		JTextField text2 = new JTextField("Hello World");
-		JTextField text3 = new JTextField("Hello World");
+		pan.setBackground(Color.GREEN);
+		pan.setMaximumSize(new Dimension(800, 800));
 		
-		pan.add(text);
-		pan.add(text2);
-		pan.add(text3);
-		//pan.add(text); */
 		add(pan);
 		
 
@@ -183,20 +172,73 @@ public class TaskBoardView extends JPanel{
 		projectBoxes.setLayout(null);
 		add(toolbar, BorderLayout.SOUTH); */
 		
+		
+		
 		//Convert this to MVC stuff
 		int numProjects = 4;
-		//JTextField textfield = new JTextField("Project 1");
-		for(int i = 0; i < numProjects; i++) {
+		
+		
+		ProgressModel prog1 = new ProgressModel("hi", 1);
+		ProgressModel prog2 = new ProgressModel("hi", 1);
+		ProgressModel prog3 = new ProgressModel("hi", 1);
+		ProgressModel prog4 = new ProgressModel("hi", 1);
+		
+		
+
+		Calendar c = new GregorianCalendar();
+		Date date = new Date();
+		c.setTime(date);
+		TaskModel mod = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
+		TaskModel mod2 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
+		TaskModel mod3 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
+		TaskModel mod4 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
+		
+		prog1.addTask(mod);
+		prog2.addTask(mod2);
+		prog3.addTask(mod3);
+		prog4.addTask(mod4);
+		
+		ProjectModel pmodel = new ProjectModel("CS 151");
+		pmodel.addProgress(prog1);
+		pmodel.addProgress(prog2);
+		pmodel.addProgress(prog3);
+		pmodel.addProgress(prog4);
+		
+		
+		for(int i = 0; i < pmodel.progressSize(); i++) {
+			ProgressModel prog = pmodel.getProgressList().get(i);
+			ProgressView view = new ProgressView(prog);
 			
-			JPanel project = new JPanel();
+			
+			pan.add(view);
+			
+			
+			/* JPanel project = new JPanel();
+			project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
+			project.setBackground(Color.RED);
+			project.setMaximumSize(new Dimension(300, 1000));
 			JTextField textfield = new JTextField("Project " + i);
-			project.setBackground(Color.BLUE);
+			textfield.setPreferredSize(new Dimension(100, 100));
+			textfield.setBackground(Color.BLUE);
+			textfield.setMaximumSize(
+				     new Dimension(100, 100) );
 			project.add(textfield);
 			
 			
-			project.setBounds(50 + (150 * i), 500, 150, 500);
-			pan.add(textfield);
-		} 
+			JPanel task = new JPanel();
+			BoxLayout boxlayout4 = new BoxLayout(task, BoxLayout.Y_AXIS);
+			task.setBackground(Color.YELLOW);
+			task.add(new JTextField("Sample Task..."));
+			task.add(new JTextField("Description..."));
+			task.add(new JTextField("Due: 5/31/2018"));
+			task.setMaximumSize(
+				     new Dimension(100, 150) );
+			project.add(task);
+			
+			//project.setBounds(50 + (150 * i), 500, 150, 500);
+			pan.add(project);  */
+		}   
+		
 	}
 	
 	public void addProject(ProjectModel model) {
