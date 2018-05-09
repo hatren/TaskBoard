@@ -28,7 +28,11 @@ public class MainScreen extends JPanel {
 		}
 		
 		frame.getContentPane().removeAll();
-		frame.add(taskboardView, "Card 2"); 
+		
+		//TaskBoardController controller = new TaskBoardController()
+		frame.add(taskboardView, "Card 2");
+		
+		
 		
 		
 		
