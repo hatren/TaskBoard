@@ -37,6 +37,10 @@ public class TaskBoardModel {
 		return projectList;
 	}
 	
+	public void setProjectList(ArrayList<ProjectModel> pml) {
+		projectList = pml;
+	}
+	
 	public void addProject(ProjectModel project) {
 		projectList.add(project);
 	}
