@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
-public class TaskView extends JPanel {
+public class TaskView extends JPanel implements Comparable<TaskView>{
 	// Variables
 	private TaskModel model;
 	private String status;
@@ -58,6 +58,7 @@ public class TaskView extends JPanel {
 		return this.model;
 	}
 	
+	//TODO Status should be changed to something that corresponds to ProgressView/ProgressModel
 	public String getStatus() {
 		return this.status;
 	}
@@ -68,5 +69,11 @@ public class TaskView extends JPanel {
 		name.setText(model.getName());
 		description.setText(model.getDescription());
 		date.setText(model.getDate().DAY_OF_MONTH + "/" + model.getDate().MONTH + "/" + model.getDate().YEAR);
+	}
+
+	@Override
+	public int compareTo(TaskView arg0) {
+		// TODO Auto-generated method stub
+		return this.getModel().compareTo(arg0.getModel());
 	}
 }

@@ -3,6 +3,7 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -46,10 +47,21 @@ public class ProjectView extends JPanel {
 	
 	// addTask
 	public void addProgress(ProgressModel model) {
+		// Remove All
+		for(ProgressView progress: progressList) {
+			this.remove(progress);
+		}
+	
+		// Add
 		this.model.addProgress(model);
 		ProgressView progressView = new ProgressView(model);
 		progressList.add(progressView);
-		add(progressView);
+		Collections.sort(progressList);
+		
+		// Show All
+		for(ProgressView progress: progressList) {
+			this.add(progress);
+		}
 	}
 	
 	// removeTask

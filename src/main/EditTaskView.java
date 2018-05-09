@@ -8,10 +8,9 @@ import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
-import java.util.Date;
 
-public class CreateTaskView extends JFrame {
-	private ProgressView progressView;
+public class EditTaskView extends JFrame {
+	private TaskView taskView;
 	
 	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
@@ -29,51 +28,56 @@ public class CreateTaskView extends JFrame {
 	
 	private JLabel statusLabel;
 	private JTextArea statusInput;
-	private JButton addButton;
+	private JButton editButton;
 	private JButton exitButton;
 	
-	public CreateTaskView(ProgressView progressView) {
-		this.progressView = progressView;
+	public EditTaskView(TaskView taskView) {
+		this.taskView = taskView;
 		
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(5,2));
 		
 		Border border = BorderFactory.createEtchedBorder();
 		
+		// nameLabel
 		nameLabel = new JLabel("Name: ");
 		nameLabel.setBorder(border);
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
 		optionPanel.add(nameLabel);
 		
-		nameInput = new JTextArea();
+		// nameInput
+		nameInput = new JTextArea(taskView.getModel().getName());
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		
+		// descriptionLabel
 		descriptionLabel = new JLabel("Description: ");
 		descriptionLabel.setBorder(border);
 		optionPanel.add(descriptionLabel);
 		
-		descriptionInput = new JTextArea();
+		// descriptionInput
+		descriptionInput = new JTextArea(taskView.getModel().getDescription());
 		descriptionInput.setBorder(border);
 		optionPanel.add(descriptionInput);
 		
-		
+		// dueDateLabel
 		dueDateLabel = new JLabel("Due Date: ");
 		dueDateLabel.setBorder(border);
 		optionPanel.add(dueDateLabel);
 		
+		// dueDateInput
 		dueDatePanel = new JPanel();
 		dueDatePanel.setLayout(new GridLayout(1,3));
 		
-		dayInput = new JTextArea();
+		dayInput = new JTextArea(Integer.toString(taskView.getModel().getDate().DAY_OF_MONTH));
 		dayInput.setBorder(border);
 		dueDatePanel.add(dayInput);
 		
-		monthInput = new JTextArea();
+		monthInput = new JTextArea(Integer.toString(taskView.getModel().getDate().MONTH));
 		monthInput.setBorder(border);
 		dueDatePanel.add(monthInput);
 		
-		yearInput = new JTextArea();
+		yearInput = new JTextArea(Integer.toString(taskView.getModel().getDate().YEAR));
 		yearInput.setBorder(border);
 		dueDatePanel.add(yearInput);
 		
@@ -83,27 +87,26 @@ public class CreateTaskView extends JFrame {
 		statusLabel.setBorder(border);
 		optionPanel.add(statusLabel);
 		
-		statusInput = new JTextArea();
+		statusInput = new JTextArea(taskView.getModel().getStatus());
 		statusInput.setBorder(border);
 		optionPanel.add(statusInput);
 		
-		addButton = new JButton("Add");
-		addButton.addActionListener(new ActionListener() {
+		editButton = new JButton("Edit");
+		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// Return Model
-				addTask();
+				editTask();
+				close();
 			}
 		});
 		
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// Exit
 				close();
 			}
 		});
 		
-		optionPanel.add(addButton);
+		optionPanel.add(editButton);
 		optionPanel.add(exitButton);
 		
 		add(optionPanel);
@@ -123,9 +126,19 @@ public class CreateTaskView extends JFrame {
 		return date;
 	}
 	// Creates the TaskModel from the input boxes and adds it
-	private void addTask() {
-		TaskModel task = new TaskModel(nameInput.getText(), descriptionInput.getText(), getDate(), statusInput.getText());
-		progressView.addTask(task);
+	private void editTask() {
+		// Edit Model
+		// Name
+		taskView.getModel().setName(nameInput.getText());
+		// Description
+		taskView.getModel().setDescription(descriptionInput.getText());
+		// Date
+		taskView.getModel().setDate(getDate());
+		// Status
+		taskView.getModel().setStatus(statusInput.getText());
+		
+		// Edit View
+		taskView.setData();
 		dispose();
 	}
 	
@@ -135,8 +148,9 @@ public class CreateTaskView extends JFrame {
 	}
 	
 //	 Main test
-//	public static void main(String[] args) {
-//		ProgressView test = new ProgressView(new ProgressModel("test", 0));
-//		CreateTaskView test2 = new CreateTaskView(test);
-//	}
+	public static void main(String[] args) {
+		TaskModel testModel = new TaskModel("Name test", "Description test", Calendar.getInstance(), "Status test");
+		TaskView testView = new TaskView(testModel);
+		EditTaskView editView = new EditTaskView(testView);
+	}
 }

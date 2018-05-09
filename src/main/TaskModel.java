@@ -43,10 +43,12 @@ public class TaskModel implements Comparable<TaskModel>{
 		this.description = description;
 	}
 	
+	//TODO Fix how this this looks
 	public void setDate(Calendar dueDate) {
 		this.dueDate = dueDate;
 	}
 	
+	//TODO This variable should correspond to the ProgressModel it is contained in
 	public void setStatus(String status) {
 		this.status = status;
 	}
