@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 
 public class TaskBoardView extends JPanel{
 	private TaskBoardModel model;
@@ -46,7 +47,7 @@ public class TaskBoardView extends JPanel{
 	
 	private JPanel projectBoxes;
 	
-	public TaskBoardView() {
+	public TaskBoardView() throws BadLocationException{
 		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName.ser");
 		this.model = model;
 		

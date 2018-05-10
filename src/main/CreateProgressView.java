@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ public class CreateProgressView extends JFrame {
 	private JButton addButton;
 	private JButton exitButton;
 	
-	public CreateProgressView(ProjectView projectView) {
+	public CreateProgressView(ProjectView projectView) throws BadLocationException {
 		this.projectView = projectView;
 		
 		optionPanel = new JPanel();
@@ -40,7 +41,12 @@ public class CreateProgressView extends JFrame {
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Return Model
-				addProject();
+				try {
+					addProject();
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -62,7 +68,7 @@ public class CreateProgressView extends JFrame {
 	}
 	
 	// Creates the TaskModel from the input boxes and adds it
-	private void addProject() {
+	private void addProject() throws BadLocationException {
 		ProgressModel model = new ProgressModel(nameInput.getText(), projectView.getModel().getProgressList().size());
 		projectView.addProgress(model);
 		dispose();

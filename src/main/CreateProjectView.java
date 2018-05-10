@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,7 +75,7 @@ public class CreateProjectView extends JFrame {
 	}
 	
 //	 Main test
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BadLocationException {
 		TaskBoardView test = new TaskBoardView();
 		
 		CreateProjectView test2 = new CreateProjectView(test);

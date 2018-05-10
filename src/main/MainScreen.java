@@ -5,12 +5,13 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 public class MainScreen extends JPanel {
 	//private LoginView login;
 	//private TaskBoardView view;
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws BadLocationException{
 		JFrame frame = new JFrame();
 		frame.setLayout(new CardLayout());
 		frame.setSize(900, 900);

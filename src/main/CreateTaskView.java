@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,7 +94,12 @@ public class CreateTaskView extends JFrame {
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Return Model
-				addTask();
+				try {
+					addTask();
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -118,14 +124,14 @@ public class CreateTaskView extends JFrame {
 	// Gets the date from the inputs
 	private Calendar getDate() {
 		int day = Integer.parseInt(dayInput.getText());
-		int month = Integer.parseInt(monthInput.getText());
-		int year = Integer.parseInt(yearInput.getText());
+		int month = Integer.parseInt(monthInput.getText()) -1;
+		int year = Integer.parseInt(yearInput.getText()) + 2000;
 		Calendar date = new GregorianCalendar(year, month, day);
 //		date.set(year, month, day);
 		return date;
 	}
 	// Creates the TaskModel from the input boxes and adds it
-	private void addTask() {
+	private void addTask() throws BadLocationException {
 		TaskModel task = new TaskModel(nameInput.getText(), descriptionInput.getText(), getDate(), statusInput.getText());
 		progressView.addTask(task);
 		dispose();
@@ -137,7 +143,7 @@ public class CreateTaskView extends JFrame {
 	}
 	
 //	 Main test
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BadLocationException {
 		ProgressView test = new ProgressView(new ProgressModel("test", 0));
 		CreateTaskView test2 = new CreateTaskView(test);
 	}

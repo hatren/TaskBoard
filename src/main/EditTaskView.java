@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,7 +149,7 @@ public class EditTaskView extends JFrame {
 	}
 	
 //	 Main test
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BadLocationException {
 		TaskModel testModel = new TaskModel("Name test", "Description test", Calendar.getInstance(), "Status test");
 		TaskView testView = new TaskView(testModel);
 		EditTaskView editView = new EditTaskView(testView);

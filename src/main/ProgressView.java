@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	// Variables
@@ -32,7 +33,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	int counter = 0;
 	
 	// Constructor
-	public ProgressView(ProgressModel model) {
+	public ProgressView(ProgressModel model) throws BadLocationException {
 		// Initialize
 		this.model = model;
 		
@@ -97,7 +98,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	}
 	
 	// addTask
-	public void addTask(TaskModel model) {
+	public void addTask(TaskModel model) throws BadLocationException {
 		// Remove all
 		for(TaskView view: taskList) {
 			taskPanel.remove(view);
