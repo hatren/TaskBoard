@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
@@ -10,31 +10,36 @@ import javax.swing.text.BadLocationException;
 public class MainScreen extends JPanel {
 	//private LoginView login;
 	//private TaskBoardView view;
-	private JFrame frame = new JFrame();
+	//private JFrame frame = new JFrame();
+	static CardLayout layout = new CardLayout();
 	static TaskBoardView taskboardView = null;
 	public static void main(String[] args) throws BadLocationException{
 		JFrame frame = new JFrame();
-		frame.setLayout(new CardLayout());
+		frame.setLayout(layout);
 		frame.setSize(900, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		taskboardView = new TaskBoardView();
-		frame.add(taskboardView, "Card 2");
+		taskboardView = new TaskBoardView(frame);
+		//frame.add(taskboardView, "Card 2");
 		
 		
-		/*
+		
 		LoginView loginView = new LoginView(frame, taskboardView);
 		
 		
 		frame.getContentPane().add(loginView, "Card 1");
-		while(loginView.isAuthenticated() == false) {
+		/*while(loginView.isAuthenticated() == false) {
 			
 		}
 		
-		frame.getContentPane().removeAll();
+		//frame.getContentPane().removeAll();
+		System.out.print("GREAT SUCCESS");
 		
 		//TaskBoardController controller = new TaskBoardController()
+		frame.getContentPane().removeAll();
 		frame.add(taskboardView, "Card 2"); */
+		
+		
 		
 		
 		
@@ -52,6 +57,7 @@ public class MainScreen extends JPanel {
 		
 		
 	}
+	/*
 	
 	public void logIn() {
 
@@ -60,14 +66,7 @@ public class MainScreen extends JPanel {
 		
 		
 		frame.getContentPane().add(loginView);
-		while(loginView.isAuthenticated() == false) {
-			
-		}
-		
-		frame.getContentPane().removeAll();
-		
-		//TaskBoardController controller = new TaskBoardController()
-		frame.add(taskboardView, "Card 2");
-	}
+		  
+	} */
 	
 }

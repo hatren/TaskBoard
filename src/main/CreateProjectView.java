@@ -76,7 +76,7 @@ public class CreateProjectView extends JFrame {
 	
 //	 Main test
 	public static void main(String[] args) throws BadLocationException {
-		TaskBoardView test = new TaskBoardView();
+		TaskBoardView test = new TaskBoardView(null);
 		
 		CreateProjectView test2 = new CreateProjectView(test);
 	}

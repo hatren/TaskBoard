@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.awt.CardLayout;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -23,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
 public class TaskBoardView extends JPanel{
@@ -32,6 +35,8 @@ public class TaskBoardView extends JPanel{
 //	private JFrame buttonFrame;
 //	private JFrame mainFrame;
 	private JButton addProjectButton;
+	
+	JPanel thisPanel = this;
 	
 	//TODO Save the currentProject to this variable whenever a project is loaded
 	private ProjectView currentProject;
@@ -51,10 +56,19 @@ public class TaskBoardView extends JPanel{
 	private JPanel toolbar;
 	
 	private JPanel projectBoxes;
+	private JFrame prev;
 	
-	public TaskBoardView() throws BadLocationException{
+	public boolean loggy = false;
+	
+	public boolean getLoggy() {
+		return loggy;
+	}
+	
+	public TaskBoardView(final JFrame prev) throws BadLocationException{
 		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName.ser");
 		this.model = model;
+		
+		this.prev = prev;
 		
 		
 		ProjectModel pmodel = new ProjectModel("CS 151");
@@ -189,8 +203,15 @@ public class TaskBoardView extends JPanel{
 		logOut = new JButton("Logout");
 		logOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new MainScreen().logIn();
 				
+				thisPanel.setVisible(false);
+				String[] arguments = new String[0];
+			    try {
+					MainScreen.main(arguments);
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		//logOut.setBounds(700, 50, 75, 50);

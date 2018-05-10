@@ -89,7 +89,7 @@ public class LoginView extends JPanel{
 				loginCheck();
 			}
 		});
-		loginButton.setBounds(50, 350, 400, 100);
+		loginButton.setBounds(350, 200, 100, 50);
 		login.add(loginButton);
 	}
 	
@@ -101,6 +101,7 @@ public class LoginView extends JPanel{
 			// Maybe send a boolean to a controller or something
 			// test
 			
+			isAuthenticated = true;
 			mainTitle.setText("Success");
 			frame.getContentPane().removeAll();
 			frame.getContentPane().add(view, "Card 2");
