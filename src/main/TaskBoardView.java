@@ -46,7 +46,7 @@ public class TaskBoardView extends JPanel{
 	private JPanel projectBoxes;
 	
 	public TaskBoardView() {
-		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName");
+		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName.ser");
 		this.model = model;
 		
 		BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -104,8 +104,8 @@ public class TaskBoardView extends JPanel{
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					tbc.save();
-				} catch (ClassNotFoundException | IOException e) {
+					saveTasks();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					System.out.println("serialization failed");
 					e.printStackTrace();
@@ -130,7 +130,7 @@ public class TaskBoardView extends JPanel{
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					ArrayList<ProjectModel> pjm = tbc.readSaved();
+					ArrayList<ProjectModel> pjm = loadTasks();
 					for(ProjectModel pm: pjm) {
 						addProject(pm);
 					}
@@ -270,4 +270,19 @@ public class TaskBoardView extends JPanel{
 		// This most likely doesn't work
 		projectList.remove(new ProjectView(model));
 	}
+	
+	public void saveTasks() throws FileNotFoundException, IOException {
+		ObjectOutputStream out = new ObjectOutputStream(
+		         new FileOutputStream(model.getFileName()));
+		      out.writeObject(model.getProjectList());
+		      out.close();
+	}
+	
+	public ArrayList<ProjectModel> loadTasks() throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in = new ObjectInputStream(
+		         new FileInputStream(model.getFileName())); 
+		ArrayList<ProjectModel> savedModels =  (ArrayList<ProjectModel>) in.readObject();
+		return savedModels;
+	}
+	
 }
