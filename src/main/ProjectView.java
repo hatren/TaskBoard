@@ -14,18 +14,18 @@ import javax.swing.JTextArea;
 
 public class ProjectView extends JPanel {
 	// View Project Information
-	private ProjectModel model;
+	private ProjectModel projectModel;
 	private ArrayList<ProgressView> progressList = new ArrayList<ProgressView>();
 	private JTextArea name;
 	private JButton addProgressButton;
 	
 	// Constructor
-	public ProjectView(ProjectModel model) {
+	public ProjectView(ProjectModel projectModel) {
 		// Initialize
-		this.model = model;
+		this.projectModel = projectModel;
 		
 		// Add Name Text
-		name = new JTextArea(model.getName());
+		name = new JTextArea(projectModel.getName());
 		/* add(name);
 		
 		// Add ProgressViews
@@ -49,6 +49,10 @@ public class ProjectView extends JPanel {
 		project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
 	}
 	
+	public ProjectModel getModel() {
+		return projectModel;
+	}
+	
 	// addTask
 	public void addProgress(ProgressModel model) {
 		// Remove All
@@ -57,7 +61,7 @@ public class ProjectView extends JPanel {
 		}
 	
 		// Add
-		this.model.addProgress(model);
+		this.projectModel.addProgress(model);
 		ProgressView progressView = new ProgressView(model);
 		progressList.add(progressView);
 		Collections.sort(progressList);
@@ -80,6 +84,18 @@ public class ProjectView extends JPanel {
 		Collections.sort(progressList);
 				
 		// Add All to JPanel
+		for(ProgressView progress: progressList) {
+			this.add(progress);
+		}
+	}
+	
+	public void sort() {
+		for(ProgressView progress: progressList) {
+			this.remove(progress);
+		}
+		
+		Collections.sort(progressList);
+		
 		for(ProgressView progress: progressList) {
 			this.add(progress);
 		}

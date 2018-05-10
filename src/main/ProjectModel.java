@@ -27,6 +27,17 @@ public class ProjectModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	// Swaps
+	public void swap(ProgressModel arg0, ProgressModel arg1) {
+		int tempIndex = progressList.indexOf(arg1);
+		progressList.set(progressList.indexOf(arg0), arg1);
+		progressList.set(tempIndex, arg0);
+		
+		int tempPriority = arg0.getPriority();
+		arg0.setPriority(arg1.getPriority());
+		arg1.setPriority(tempPriority);
+	}
 
 	// Add new Progress type
 	public void addProgress(ProgressModel progress) {

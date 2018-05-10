@@ -17,6 +17,10 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	}
 	
 	// Getters
+	public String toString() {
+		return status;
+	}
+	
 	public String getStatus() {
 		return status;
 	}
