@@ -75,10 +75,14 @@ public class TaskBoardView extends JPanel{
 		
 		// Will need to get this data from controller
 		
-		String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5"};
-		projectDropDown = new JComboBox<String>(choices);
-		//projectDropDown.setBounds(250,50, 150, 50);
 		
+		String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5"};
+		
+		
+		
+		
+		
+		projectDropDown = new JComboBox<String>(choices);
 		projectDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) projectDropDown.getSelectedItem();
@@ -101,7 +105,6 @@ public class TaskBoardView extends JPanel{
 				edit();
 			}
 		});
-		//edit.setBounds(400, 50, 50, 50);
 		toolbar.add(edit, BorderLayout.SOUTH);
 		
 		save = new JButton("Save");
@@ -159,7 +162,7 @@ public class TaskBoardView extends JPanel{
 		logOut = new JButton("Logout");
 		logOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				new MainScreen().logIn();
 				
 			}
 		});

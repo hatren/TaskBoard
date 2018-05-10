@@ -35,6 +35,8 @@ public class EditTaskView extends JFrame {
 	public EditTaskView(TaskView taskView) {
 		this.taskView = taskView;
 		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(5,2));
 		
@@ -117,7 +119,7 @@ public class EditTaskView extends JFrame {
 		add(optionPanel);
 		
 		setSize(300, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	

@@ -10,15 +10,16 @@ import javax.swing.text.BadLocationException;
 public class MainScreen extends JPanel {
 	//private LoginView login;
 	//private TaskBoardView view;
-	
+	private JFrame frame = new JFrame();
+	static TaskBoardView taskboardView = null;
 	public static void main(String[] args) throws BadLocationException{
 		JFrame frame = new JFrame();
 		frame.setLayout(new CardLayout());
 		frame.setSize(900, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		TaskBoardView taskboardView = new TaskBoardView();
-		frame.add(taskboardView);
+		taskboardView = new TaskBoardView();
+		frame.add(taskboardView, "Card 2");
 		
 		
 		/*
@@ -47,8 +48,26 @@ public class MainScreen extends JPanel {
 		//TODO Implement Loading w/ ComboBox
 		//TODO Differentiate between CreateProject, CreateProgress, CreateTask. Maybe use a comboBox or popup frame
 		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask. 
+		// - I don't think we need Delete classes if we use setVisible(false)
 		
 		
+	}
+	
+	public void logIn() {
+
+		frame.getContentPane().removeAll();
+		LoginView loginView = new LoginView(frame, taskboardView);
+		
+		
+		frame.getContentPane().add(loginView);
+		while(loginView.isAuthenticated() == false) {
+			
+		}
+		
+		frame.getContentPane().removeAll();
+		
+		//TaskBoardController controller = new TaskBoardController()
+		frame.add(taskboardView, "Card 2");
 	}
 	
 }

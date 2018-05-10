@@ -57,7 +57,7 @@ public class EditProgressView extends JFrame {
 		add(optionPanel);
 		
 		setSize(300, 120);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	

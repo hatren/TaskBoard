@@ -29,6 +29,8 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	private JButton editButton;
 	private JButton deleteButton;
 	
+	JPanel pan = this;
+	
 	// Constructor
 	public TaskView(TaskModel model) throws BadLocationException {
 		// Initialize
@@ -37,6 +39,7 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		
 //		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setLayout(new BorderLayout());
+		this.setMaximumSize(new Dimension(200, 250));
 		
 		this.status = model.getStatus();
 		name_and_date = model.getName()+ " - " + model;
@@ -72,7 +75,8 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 			public void actionPerformed(ActionEvent arg0) {
 				int input = JOptionPane.showConfirmDialog(null, "Are you sure you would like to delete this task?", "Deletion Prompt", JOptionPane.OK_CANCEL_OPTION);
 				if(input == 0) {
-					getProgressView().removeTask(getThis());
+					//getProgressView().removeTask(getThis());
+					pan.setVisible(false);
 				}
 			}
 	    	

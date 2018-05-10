@@ -15,10 +15,12 @@ import java.util.Collections;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 
@@ -35,6 +37,9 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	private JPanel taskPanel;
 	private boolean on = false;
 	int counter = 0;
+	
+	JPanel pan = this;
+	ProgressView pan2 = this;
 	
 	// Constructor
 	public ProgressView(ProgressModel model) throws BadLocationException {
@@ -75,7 +80,8 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			addTask(task);
 		}*/
 		taskPanel = new JPanel();
-		taskPanel.setLayout(new FlowLayout());
+		taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.Y_AXIS));
+		//taskPanel.setLayout(new FlowLayout());
 		this.add(taskPanel, BorderLayout.CENTER);
 		
 		taskList = new ArrayList<TaskView>();
@@ -91,7 +97,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		addTaskButton = new JButton("+");
 		addTaskButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CreateTaskView createTaskView = new CreateTaskView((ProgressView) addTaskButton.getParent());
+				CreateTaskView createTaskView = new CreateTaskView(pan2);
 			}
 		});
 		buttonPanel.add(addTaskButton);
@@ -108,6 +114,8 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Figure out how to delete this. Prompt user to confirm the deletion or cancel.
+				
+				pan.setVisible(false);
 			}
 		});
 		buttonPanel.add(deleteProgressButton);
