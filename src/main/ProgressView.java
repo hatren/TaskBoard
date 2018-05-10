@@ -4,46 +4,63 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
-public class ProgressView extends JPanel{
+public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	// Variables
 	private ProgressModel model;
 	private ArrayList<TaskView> taskList;
-	private JTextField status;
+	private JLabel status;
 	private JButton addTaskButton;
+	private boolean on = false;
+	int counter = 0;
 	
 	// Constructor
-	public ProgressView(ProgressModel model) {
+	public ProgressView(final ProgressModel model) {
 		// Initialize
 		this.model = model;
 		
-		/*project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
-		project.setBackground(Color.RED);
-		project.setMaximumSize(new Dimension(300, 1000));
-		JTextField textfield = new JTextField("Project " + i);
-		textfield.setPreferredSize(new Dimension(100, 100));
-		textfield.setBackground(Color.BLUE);
-		textfield.setMaximumSize(
-			     new Dimension(100, 100) );
-		project.add(textfield); */
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBackground(Color.RED);
-		this.setMaximumSize(new Dimension(300, 1000));
+		//Border border = BorderFactory.createLineBorder(Color.BLUE, 5)
+		
 		
 		// Add Status Text
-		status = new JTextField(model.getStatus());
+		status = new JLabel(model.getStatus());
+		status.addMouseListener(new MouseAdapter() {
+			
+
+			public void mouseClicked(MouseEvent e) {
+				counter++;
+				if(counter % 2 == 1) {
+					status.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+					model.selected = true;
+				} else {
+					status.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+					model.selected = false;
+				}
+				System.out.println("Mouseclick" + counter);
+				
+			}
+		});
 		add(status);
 		
-		/*  Add TaskViews
+		// Add TaskViews
 		taskList = new ArrayList<TaskView>();
+//		for(TaskModel task: this.model.getTaskList()) {
+//			addTask(task);
+//		}
+		/*
 		for(TaskModel task: this.model.getTaskList()) {
 			addTask(task);
 		}*/
@@ -69,15 +86,48 @@ public class ProgressView extends JPanel{
 	
 	// addTask
 	public void addTask(TaskModel model) {
+		// Remove all
+		for(TaskView view: taskList) {
+			this.remove(view);
+		}
+		
+		// Add
 		this.model.addTask(model);
 		TaskView taskView = new TaskView(model);
 		taskList.add(taskView);
-		add(taskView);
+		
+		// Sort ArrayList
+		Collections.sort(taskList);
+		
+		// Add all
+		for(TaskView view: taskList) {
+			this.add(view);
+		}
+	}
+	
+	public ProgressModel getModel() {
+		return model;
 	}
 	
 	// removeTask
-	public void removeTask(TaskView view) {
-//		taskList.remove(view);
-//		remove(view);
+	public void removeTask(TaskView task) {
+		// Remove Views From JPanel
+		for(TaskView view: taskList) {
+			this.remove(view);
+		}
+		
+		// Remove and Sort ArrayList
+		taskList.remove(task);
+		Collections.sort(taskList);
+		
+		// Add all
+		for(TaskView view: taskList) {
+			this.add(view);
+		}
+	}
+
+	@Override
+	public int compareTo(ProgressView arg0) {	
+		return this.getModel().compareTo(arg0.getModel());
 	}
 }
