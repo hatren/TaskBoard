@@ -8,6 +8,7 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	private String status;
 	private int priority;
 	private ArrayList<TaskModel> taskList;
+	protected boolean selected;
 	
 	// Constructor
 	public ProgressModel(String status, int priority) {
@@ -17,10 +18,6 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	}
 	
 	// Getters
-	public String toString() {
-		return status;
-	}
-	
 	public String getStatus() {
 		return status;
 	}

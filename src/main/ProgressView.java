@@ -4,30 +4,55 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	// Variables
 	private ProgressModel model;
 	private ArrayList<TaskView> taskList;
-	private JTextField status;
+	private JLabel status;
 	private JButton addTaskButton;
+	private boolean on = false;
+	int counter = 0;
 	
 	// Constructor
-	public ProgressView(ProgressModel model) {
+	public ProgressView(final ProgressModel model) {
 		// Initialize
 		this.model = model;
 		
+		//Border border = BorderFactory.createLineBorder(Color.BLUE, 5)
+		
+		
 		// Add Status Text
-		status = new JTextField(model.getStatus());
+		status = new JLabel(model.getStatus());
+		status.addMouseListener(new MouseAdapter() {
+			
+
+			public void mouseClicked(MouseEvent e) {
+				counter++;
+				if(counter % 2 == 1) {
+					status.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+					model.selected = true;
+				} else {
+					status.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+					model.selected = false;
+				}
+				System.out.println("Mouseclick" + counter);
+				
+			}
+		});
 		add(status);
 		
 		// Add TaskViews
