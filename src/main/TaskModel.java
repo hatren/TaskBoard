@@ -1,6 +1,9 @@
 package main;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class TaskModel implements Comparable<TaskModel>{
 	// Variables
@@ -62,5 +65,19 @@ public class TaskModel implements Comparable<TaskModel>{
 			return 1;
 		}
 		else return this.name.compareTo(arg0.getName());
+	}
+	
+	public String toString() {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String formatted = format1.format(dueDate.getTime());
+		return formatted;
+	}
+	
+	public static void main(String[] args) {
+		Calendar c = new GregorianCalendar();
+		Date date = new Date();
+		c.setTime(date);
+		TaskModel tm = new TaskModel("title shit","descriptive shit",c,"some shiz");
+		System.out.println(tm);
 	}
 }

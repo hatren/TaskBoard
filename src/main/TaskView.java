@@ -31,7 +31,7 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		StyleContext context = new StyleContext();
 	    StyledDocument document = new DefaultStyledDocument(context);
 	    Style style = context.getStyle(StyleContext.DEFAULT_STYLE);
-	    StyleConstants.setFontSize(style, 10);
+	    StyleConstants.setFontSize(style, 15);
 	    document.insertString(document.getLength(), (name_and_date+"\n"+description), style);
 		tasks = new JTextPane(document);
 		tasks.setEditable(false);
@@ -88,9 +88,9 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	// Set data for TextAreas
 	public void setData(){
 		this.status = model.getStatus();
-		name_and_date = model.getName()+ " - " + model.getDate().DAY_OF_MONTH + "/" + model.getDate().MONTH + "/" + model.getDate().YEAR;
+		name_and_date = model.getName()+ " - " + model;
 		description = model.getDescription();
-		date = model.getDate().DAY_OF_MONTH + "/" + model.getDate().MONTH + "/" + model.getDate().YEAR;
+		date = ""+model;
 	}
 
 	@Override
