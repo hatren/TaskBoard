@@ -95,7 +95,11 @@ public class EditTaskView extends JFrame {
 		editButton = new JButton("Edit");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				editTask();
+				try {
+					editTask();
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
 				close();
 			}
 		});
@@ -127,7 +131,7 @@ public class EditTaskView extends JFrame {
 		return date;
 	}
 	// Creates the TaskModel from the input boxes and adds it
-	private void editTask() {
+	private void editTask() throws BadLocationException {
 		// Edit Model
 		// Name
 		taskView.getModel().setName(nameInput.getText());

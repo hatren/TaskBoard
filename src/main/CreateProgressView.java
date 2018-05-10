@@ -44,7 +44,6 @@ public class CreateProgressView extends JFrame {
 				try {
 					addProject();
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

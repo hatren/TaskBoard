@@ -46,7 +46,7 @@ public class MainScreen extends JPanel {
 		//TODO Implement Saving
 		//TODO Implement Loading w/ ComboBox
 		//TODO Differentiate between CreateProject, CreateProgress, CreateTask. Maybe use a comboBox or popup frame
-		//TODO Differentiate between EditProject, EditProgress, EditTask.
+		//TODO Differentiate between EditProject and EditProgress
 		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask. 
 		
 		

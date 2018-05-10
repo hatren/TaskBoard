@@ -108,7 +108,6 @@ public class TaskBoardView extends JPanel{
 				try {
 					saveTasks();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					System.out.println("serialization failed");
 					e.printStackTrace();
 				}
@@ -137,7 +136,6 @@ public class TaskBoardView extends JPanel{
 						addProject(pm);
 					}
 				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

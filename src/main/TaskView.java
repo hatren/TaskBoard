@@ -1,8 +1,12 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,13 +25,23 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	private String date;
 	private JTextPane tasks;
 	
+	private JPanel buttonPanel;
+	private JButton editButton;
+	private JButton deleteButton;
+	
 	// Constructor
 	public TaskView(TaskModel model) throws BadLocationException {
 		// Initialize
 		this.model = model;
-		setData();
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		
+//		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());
+		
+		this.status = model.getStatus();
+		name_and_date = model.getName()+ " - " + model;
+		description = model.getDescription();
+		date = ""+model;
 		StyleContext context = new StyleContext();
 	    StyledDocument document = new DefaultStyledDocument(context);
 	    Style style = context.getStyle(StyleContext.DEFAULT_STYLE);
@@ -36,7 +50,25 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		tasks = new JTextPane(document);
 		tasks.setEditable(false);
 		
-	    add(tasks);
+//		setData();
+		
+	    add(tasks, BorderLayout.CENTER);
+	    
+	    buttonPanel = new JPanel();
+	    buttonPanel.setLayout(new GridLayout(1,2));
+	    editButton = new JButton("Edit");
+	    editButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				edit();
+			}
+	    });
+	    buttonPanel.add(editButton);
+	    
+	    deleteButton = new JButton("Delete");
+	    buttonPanel.add(deleteButton);
+	    
+	    add(buttonPanel,BorderLayout.SOUTH);
 		/*
 		name_and_date = new JLabel();
 		name_and_date.setBorder(border);
@@ -85,12 +117,24 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		return this.status;
 	}
 	
+	private void edit() {
+		EditTaskView editTaskView = new EditTaskView(this);
+	}
+	
 	// Set data for TextAreas
-	public void setData(){
+	public void setData() throws BadLocationException{
 		this.status = model.getStatus();
 		name_and_date = model.getName()+ " - " + model;
 		description = model.getDescription();
 		date = ""+model;
+		
+		StyleContext context = new StyleContext();
+	    StyledDocument document = new DefaultStyledDocument(context);
+	    Style style = context.getStyle(StyleContext.DEFAULT_STYLE);
+	    StyleConstants.setFontSize(style, 15);
+	    document.insertString(document.getLength(), (name_and_date+"\n"+description), style);
+	    
+	    tasks.setDocument(document);
 	}
 
 	@Override
@@ -98,19 +142,16 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		return this.getModel().compareTo(arg0.getModel());
 	}
 	
-	public static void main(String[] args) throws BadLocationException {
-		JFrame jf = new JFrame();
-		Calendar c = new GregorianCalendar();
-		Date date = new Date();
-		c.setTime(date);
-		TaskModel tbm = new TaskModel("test", "does something", c, "completed I guess");
-		TaskView tv = new TaskView(tbm);
-		jf.setSize(250, 250);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setVisible(true);
-		jf.add(tv);
-	}
-	
-	
-	
+//	public static void main(String[] args) throws BadLocationException {
+//		JFrame jf = new JFrame();
+//		Calendar c = new GregorianCalendar();
+//		Date date = new Date();
+//		c.setTime(date);
+//		TaskModel tbm = new TaskModel("test", "does something", c, "completed I guess");
+//		TaskView tv = new TaskView(tbm);
+//		jf.setSize(250, 250);
+//		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		jf.setVisible(true);
+//		jf.add(tv);
+//	}
 }

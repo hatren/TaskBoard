@@ -97,7 +97,6 @@ public class CreateTaskView extends JFrame {
 				try {
 					addTask();
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
