@@ -1,9 +1,10 @@
 package main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ProgressModel implements Comparable<ProgressModel>{
+public class ProgressModel implements Comparable<ProgressModel>, Serializable{
 	// Variables
 	private String status;
 	

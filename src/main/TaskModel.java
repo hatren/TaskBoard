@@ -1,11 +1,12 @@
 package main;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class TaskModel implements Comparable<TaskModel>{
+public class TaskModel implements Comparable<TaskModel>, Serializable{
 	// Variables
 	private String name;
 	private String description;

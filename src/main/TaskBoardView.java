@@ -225,6 +225,7 @@ public class TaskBoardView extends JPanel{
 		pmodel.addProgress(prog3);
 		pmodel.addProgress(prog4);
 		
+		model.addProject(pmodel);
 		
 		for(int i = 0; i < pmodel.progressSize(); i++) {
 			ProgressModel prog = pmodel.getProgressList().get(i);
@@ -292,6 +293,13 @@ public class TaskBoardView extends JPanel{
 		ObjectInputStream in = new ObjectInputStream(
 		         new FileInputStream(model.getFileName())); 
 		ArrayList<ProjectModel> savedModels =  (ArrayList<ProjectModel>) in.readObject();
+		for(ProjectModel pm: savedModels) {
+			for(ProgressModel prog: pm.getProgressList()) {
+				for(TaskModel tm: prog.getTaskList()) {
+					System.out.println(tm);
+				}
+			}
+		}
 		return savedModels;
 	}
 	

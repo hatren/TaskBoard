@@ -1,9 +1,10 @@
 package main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ProjectModel {
+public class ProjectModel implements Serializable{
 	// Variables
 	private String name;
 	private ArrayList<ProgressModel> progressList;
