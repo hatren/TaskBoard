@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 
 public class TaskBoardView extends JPanel{
 	private TaskBoardModel model;
+	private TaskBoardController tbc = new TaskBoardController(model);
 	private JLabel mainTitle;
 //	private JFrame buttonFrame;
 //	private JFrame mainFrame;
@@ -44,7 +46,7 @@ public class TaskBoardView extends JPanel{
 	private JPanel projectBoxes;
 	
 	public TaskBoardView() {
-		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName");
+		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName.ser");
 		this.model = model;
 		
 		BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -101,7 +103,13 @@ public class TaskBoardView extends JPanel{
 		save = new JButton("Save");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					saveTasks();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("serialization failed");
+					e.printStackTrace();
+				}
 				
 			}
 		});
@@ -121,7 +129,15 @@ public class TaskBoardView extends JPanel{
 		load = new JButton("Load");
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					ArrayList<ProjectModel> pjm = loadTasks();
+					for(ProjectModel pm: pjm) {
+						addProject(pm);
+					}
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});
@@ -254,4 +270,19 @@ public class TaskBoardView extends JPanel{
 		// This most likely doesn't work
 		projectList.remove(new ProjectView(model));
 	}
+	
+	public void saveTasks() throws FileNotFoundException, IOException {
+		ObjectOutputStream out = new ObjectOutputStream(
+		         new FileOutputStream(model.getFileName()));
+		      out.writeObject(model.getProjectList());
+		      out.close();
+	}
+	
+	public ArrayList<ProjectModel> loadTasks() throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in = new ObjectInputStream(
+		         new FileInputStream(model.getFileName())); 
+		ArrayList<ProjectModel> savedModels =  (ArrayList<ProjectModel>) in.readObject();
+		return savedModels;
+	}
+	
 }
