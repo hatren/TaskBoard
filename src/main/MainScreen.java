@@ -44,13 +44,9 @@ public class MainScreen extends JPanel {
 		
 		//TODO Implement Saving
 		//TODO Implement Loading w/ ComboBox
-
-		//TODO Differentiate between CreateProject, CreateProgress, CreateTask
-		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask
-		//TODO Implement boolean selected w/ all views to help differentiate??????????????
-		//TODO Maybe we just have a fuck ton of buttons with + signs on them
-		//TODO Maybe we just use a dropdown box
-		//TODO Maybe CreateNew can ask what you want to do with your life
+		//TODO Differentiate between CreateProject, CreateProgress, CreateTask. Maybe use a comboBox or popup frame
+		//TODO Differentiate between EditProject, EditProgress, EditTask.
+		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask. 
 		
 		
 	}

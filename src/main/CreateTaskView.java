@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class CreateTaskView extends JFrame {
 	private ProgressView progressView;
@@ -118,8 +120,8 @@ public class CreateTaskView extends JFrame {
 		int day = Integer.parseInt(dayInput.getText());
 		int month = Integer.parseInt(monthInput.getText());
 		int year = Integer.parseInt(yearInput.getText());
-		Calendar date = Calendar.getInstance();
-		date.set(year, month, day);
+		Calendar date = new GregorianCalendar(year, month, day);
+//		date.set(year, month, day);
 		return date;
 	}
 	// Creates the TaskModel from the input boxes and adds it

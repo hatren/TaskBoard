@@ -57,7 +57,7 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		//this.add(date);
 		
 		// Add Border
-		//this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createEtchedBorder());
 	}
 	
 	// Return all TextAreas
@@ -77,6 +77,8 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	public String getStatus() {
 		return this.status;
 	}
+	
+	
 	
 	// Set data for TextAreas
 	public void setData(){

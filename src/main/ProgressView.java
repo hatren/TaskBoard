@@ -1,7 +1,10 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,6 +27,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	private ArrayList<TaskView> taskList;
 	private JLabel status;
 	private JButton addTaskButton;
+	private JPanel taskPanel;
 	private boolean on = false;
 	int counter = 0;
 	
@@ -32,12 +36,14 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		// Initialize
 		this.model = model;
 		
+		
+		
+		this.setLayout(new BorderLayout());
+		
 		// Add Status Text
 		status = new JLabel(model.getStatus());
 		status.setBorder(BorderFactory.createLineBorder(Color.RED, 5)); 
 		status.addMouseListener(new MouseAdapter() {
-			
-
 			public void mouseClicked(MouseEvent e) {
 				counter++;
 				if(counter % 2 == 1) {
@@ -52,7 +58,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 				
 			}
 		});
-		add(status);
+		add(status, BorderLayout.NORTH);
 		
 		// Add TaskViews
 		taskList = new ArrayList<TaskView>();
@@ -63,21 +69,24 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		for(TaskModel task: this.model.getTaskList()) {
 			addTask(task);
 		}*/
+		taskPanel = new JPanel();
+		taskPanel.setLayout(new FlowLayout());
+		this.add(taskPanel, BorderLayout.CENTER);
+		
 		taskList = new ArrayList<TaskView>();
 		for(int i = 0; i < this.model.getTaskList().size(); i++) {
 			TaskView taskView = new TaskView(this.model.getTaskList().get(i));
 			taskList.add(taskView);
-			add(taskView);
+			taskPanel.add(taskView);
 		}
 		
-		addTaskButton = new JButton();
+		addTaskButton = new JButton("+");
 		addTaskButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CreateTaskView createTaskView = new CreateTaskView((ProgressView) addTaskButton.getParent());
 			}
 		});
-		add(addTaskButton);
-		
+		add(addTaskButton, BorderLayout.SOUTH);
 		
 		// Test Border
 		this.setBorder(BorderFactory.createEtchedBorder());
@@ -91,20 +100,20 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	public void addTask(TaskModel model) {
 		// Remove all
 		for(TaskView view: taskList) {
-			this.remove(view);
+			taskPanel.remove(view);
 		}
 		
 		// Add
 		this.model.addTask(model);
 		TaskView taskView = new TaskView(model);
-		taskList.add(taskView);
+		taskPanel.add(taskView);
 		
 		// Sort ArrayList
 		Collections.sort(taskList);
 		
 		// Add all
 		for(TaskView view: taskList) {
-			this.add(view);
+			taskPanel.add(view);
 		}
 	}
 	
