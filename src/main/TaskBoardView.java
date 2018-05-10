@@ -202,9 +202,9 @@ public class TaskBoardView extends JPanel{
 		
 		
 
-		Calendar c = new GregorianCalendar();
-		Date date = new Date();
-		c.setTime(date);
+		Calendar c = new GregorianCalendar(2020,7-1,14);
+		//Date date = new Date();
+		//c.setTime(date);
 		TaskModel mod = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
 		TaskModel mod2 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
 		TaskModel mod3 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");

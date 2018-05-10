@@ -68,7 +68,7 @@ public class TaskModel implements Comparable<TaskModel>{
 	}
 	
 	public String toString() {
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format1 = new SimpleDateFormat("MM-dd-yyyy");
 		String formatted = format1.format(dueDate.getTime());
 		return formatted;
 	}
