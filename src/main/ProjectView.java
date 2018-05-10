@@ -53,6 +53,10 @@ public class ProjectView extends JPanel {
 		return projectModel;
 	}
 	
+	public ArrayList<ProgressView> getProgressList(){
+		return progressList;
+	}
+	
 	// addTask
 	public void addProgress(ProgressModel model) {
 		// Remove All

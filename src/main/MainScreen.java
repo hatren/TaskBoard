@@ -42,7 +42,15 @@ public class MainScreen extends JPanel {
 		//cardLayout cardLayout = (CardLayout) frame.getLayout();
 		//cardLayout.show(frame, "Card 2");
 		
-		
+		//TODO Implement Saving
+		//TODO Implement Loading w/ ComboBox
+
+		//TODO Differentiate between CreateProject, CreateProgress, CreateTask
+		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask
+		//TODO Implement boolean selected w/ all views to help differentiate??????????????
+		//TODO Maybe we just have a fuck ton of buttons with + signs on them
+		//TODO Maybe we just use a dropdown box
+		//TODO Maybe CreateNew can ask what you want to do with your life
 		
 		
 	}

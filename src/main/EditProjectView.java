@@ -93,22 +93,26 @@ public class EditProjectView extends JFrame {
 	
 	// raisePriority()
 	public void raisePriority() {
-		ProgressModel arg0 = progressList.getSelectedValue();
-		ProgressModel arg1 = progressListModel.elementAt(progressList.getSelectedIndex() - 1);
-		progressList.setSelectedIndex(progressList.getSelectedIndex() - 1);
-		
-		swap(arg0, arg1);
-		projectView.getModel().swap(arg0, arg1);
+		if(progressList.getSelectedIndex() != 0) {
+			ProgressModel arg0 = progressList.getSelectedValue();
+			ProgressModel arg1 = progressListModel.elementAt(progressList.getSelectedIndex() - 1);
+			progressList.setSelectedIndex(progressList.getSelectedIndex() - 1);
+			
+			swap(arg0, arg1);
+			projectView.getModel().swap(arg0, arg1);
+		}
 	}
 	
 	// lowerPriority()
 	public void lowerPriority() {
-		ProgressModel arg0 = progressListModel.elementAt(progressList.getSelectedIndex() + 1);
-		ProgressModel arg1 = progressList.getSelectedValue();
-		progressList.setSelectedIndex(progressList.getSelectedIndex() + 1);
-		
-		swap(arg0, arg1);
-		projectView.getModel().swap(arg0, arg1);
+		if(progressList.getSelectedIndex() != progressListModel.size() - 1) {
+			ProgressModel arg0 = progressListModel.elementAt(progressList.getSelectedIndex() + 1);
+			ProgressModel arg1 = progressList.getSelectedValue();
+			progressList.setSelectedIndex(progressList.getSelectedIndex() + 1);
+			
+			swap(arg0, arg1);
+			projectView.getModel().swap(arg0, arg1);
+		}
 	}
 	
 	// exit()

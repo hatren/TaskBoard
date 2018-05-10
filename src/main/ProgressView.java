@@ -28,15 +28,13 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	int counter = 0;
 	
 	// Constructor
-	public ProgressView(final ProgressModel model) {
+	public ProgressView(ProgressModel model) {
 		// Initialize
 		this.model = model;
 		
-		//Border border = BorderFactory.createLineBorder(Color.BLUE, 5)
-		
-		
 		// Add Status Text
 		status = new JLabel(model.getStatus());
+		status.setBorder(BorderFactory.createLineBorder(Color.RED, 5)); 
 		status.addMouseListener(new MouseAdapter() {
 			
 
@@ -44,10 +42,11 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 				counter++;
 				if(counter % 2 == 1) {
 					status.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
-					model.selected = true;
+					getModel().setSelected(true);
+
 				} else {
 					status.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
-					model.selected = false;
+					getModel().setSelected(false);
 				}
 				System.out.println("Mouseclick" + counter);
 				
@@ -82,6 +81,10 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		
 		// Test Border
 		this.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
+	public ArrayList<TaskView> getTaskList(){
+		return taskList;
 	}
 	
 	// addTask
@@ -124,6 +127,11 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		for(TaskView view: taskList) {
 			this.add(view);
 		}
+	}
+	
+	// Setters
+	public void setStatus(String status) {
+		this.status.setText(status);
 	}
 
 	@Override

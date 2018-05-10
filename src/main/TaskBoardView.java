@@ -31,6 +31,7 @@ public class TaskBoardView extends JPanel{
 //	private JFrame buttonFrame;
 //	private JFrame mainFrame;
 	private JButton addProjectButton;
+	private ProjectView currentProject;
 	private ArrayList<ProjectView> projectList = new ArrayList<ProjectView>();
 	
 	private JLabel selectProject;
@@ -90,11 +91,11 @@ public class TaskBoardView extends JPanel{
 		
 		toolbar.add(projectDropDown); 
 		
+		// Edit Button
 		edit = new JButton("Edit");
 		edit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				edit();
 			}
 		});
 		//edit.setBounds(400, 50, 50, 50);
@@ -276,6 +277,17 @@ public class TaskBoardView extends JPanel{
 		         new FileOutputStream(model.getFileName()));
 		      out.writeObject(model.getProjectList());
 		      out.close();
+	}
+	
+	// edits Object
+	public void edit() {
+		// Edit button will have to search for an object that is selected
+		// then pop up a frame dependent on the instance of that object
+		for(ProgressView progress: currentProject.getProgressList()) {
+			for(TaskView task: progress.getTaskList()) {
+				
+			}
+		}
 	}
 	
 	public ArrayList<ProjectModel> loadTasks() throws FileNotFoundException, IOException, ClassNotFoundException {

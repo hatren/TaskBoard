@@ -135,8 +135,8 @@ public class CreateTaskView extends JFrame {
 	}
 	
 //	 Main test
-//	public static void main(String[] args) {
-//		ProgressView test = new ProgressView(new ProgressModel("test", 0));
-//		CreateTaskView test2 = new CreateTaskView(test);
-//	}
+	public static void main(String[] args) {
+		ProgressView test = new ProgressView(new ProgressModel("test", 0));
+		CreateTaskView test2 = new CreateTaskView(test);
+	}
 }

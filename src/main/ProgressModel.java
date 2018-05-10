@@ -6,6 +6,8 @@ import java.util.Collections;
 public class ProgressModel implements Comparable<ProgressModel>{
 	// Variables
 	private String status;
+	
+	//TODO set priority on construction
 	private int priority;
 	private ArrayList<TaskModel> taskList;
 	protected boolean selected;
@@ -18,6 +20,14 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	}
 	
 	// Getters
+	public boolean getSelected() {
+		return selected;
+	}
+	
+	public String toString() {
+		return status;
+	}
+	
 	public String getStatus() {
 		return status;
 	}
@@ -31,6 +41,10 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	}
 	
 	// Setters
+	public void setSelected(boolean change) {
+		selected = change;
+	}
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
