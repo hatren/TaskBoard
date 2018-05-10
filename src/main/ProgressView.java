@@ -52,10 +52,12 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		
 		// Add Status Text
 		status = new JLabel(model.getStatus());
-		status.setBorder(BorderFactory.createLineBorder(Color.RED, 5)); 
+		status.setHorizontalAlignment(JLabel.CENTER);
+		status.setVerticalAlignment(JLabel.CENTER);
+		//status.setBorder(BorderFactory.createLineBorder(Color.RED, 5)); 
 		status.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				counter++;
+				/*counter++;
 				if(counter % 2 == 1) {
 					status.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
 					getModel().setSelected(true);
@@ -64,7 +66,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 					status.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
 					getModel().setSelected(false);
 				}
-				System.out.println("Mouseclick" + counter);
+				System.out.println("Mouseclick" + counter); */
 				
 			}
 		});

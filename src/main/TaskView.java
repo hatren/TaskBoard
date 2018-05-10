@@ -39,11 +39,11 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 		
 //		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setLayout(new BorderLayout());
-		this.setMaximumSize(new Dimension(200, 250));
+		this.setMaximumSize(new Dimension(250, 250));
 		
 		this.status = model.getStatus();
 		name_and_date = model.getName()+ " - " + model;
-		description = model.getDescription();
+		description = " - " + model.getDescription();
 		date = ""+model;
 		StyleContext context = new StyleContext();
 	    StyledDocument document = new DefaultStyledDocument(context);

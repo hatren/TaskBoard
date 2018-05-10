@@ -37,13 +37,16 @@ public class TaskBoardView extends JPanel{
 	private ProjectView currentProject;
 	private ArrayList<ProjectView> projectList = new ArrayList<ProjectView>();
 	
+	private ArrayList<ProjectModel> projectList2 = new ArrayList<ProjectModel>();
+	
 	private JLabel selectProject;
 	private JComboBox<String> projectDropDown;
 	private JButton edit;
 	private JButton save;
 	private JButton delete;
 	private JButton load;
-	private JButton createNew;
+	private JButton createProject;
+	private JButton createProgress;
 	private JButton logOut;
 	private JPanel toolbar;
 	
@@ -52,6 +55,13 @@ public class TaskBoardView extends JPanel{
 	public TaskBoardView() throws BadLocationException{
 		TaskBoardModel model = new TaskBoardModel("TestName", "TestFileName.ser");
 		this.model = model;
+		
+		
+		ProjectModel pmodel = new ProjectModel("CS 151");
+		projectList2.add(pmodel);
+		
+		//For the progress views
+		final JPanel pan = new JPanel();
 		
 		BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(boxlayout);
@@ -64,7 +74,7 @@ public class TaskBoardView extends JPanel{
 		toolbar = new JPanel();
 		toolbar.setLayout(new FlowLayout());
 		toolbar.setBackground(Color.PINK);
-		toolbar.setMaximumSize(new Dimension(900, 50));
+		toolbar.setMaximumSize(new Dimension(1000, 50));
 		add(toolbar, BorderLayout.CENTER);
 
 		selectProject = new JLabel("Select Project: ");
@@ -76,13 +86,13 @@ public class TaskBoardView extends JPanel{
 		// Will need to get this data from controller
 		
 		
-		String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5"};
+		//String[] choices = { "CHOICE 1","CHOICE 2", "CHOICE 3","CHOICE 4","CHOICE 5"};
 		
+		projectDropDown = new JComboBox<String>();
+		for(int i = 0; i < projectList2.size(); i++) {
+			projectDropDown.addItem(projectList2.get(i).getName());
+		}
 		
-		
-		
-		
-		projectDropDown = new JComboBox<String>(choices);
 		projectDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) projectDropDown.getSelectedItem();
@@ -125,7 +135,7 @@ public class TaskBoardView extends JPanel{
 		delete = new JButton("Delete");
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				pan.setVisible(false);
 				
 			}
 		});
@@ -149,15 +159,32 @@ public class TaskBoardView extends JPanel{
 		//load.setBounds(550, 50, 75, 50);
 		toolbar.add(load);
 		
-		createNew = new JButton("Create New");
-		createNew.addActionListener(new ActionListener() {
+		createProject = new JButton("New Project");
+		createProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
 			}
 		});
 		//createNew.setBounds(625, 50, 75, 50);
-		toolbar.add(createNew);
+		toolbar.add(createProject);
+		
+		createProgress = new JButton("New Progress");
+		createProgress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProjectView prog = new ProjectView(projectList2.get(0));
+				try {
+					CreateProgressView view = new CreateProgressView(prog);
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		//createNew.setBounds(625, 50, 75, 50);
+		toolbar.add(createProgress);
+		
 		
 		logOut = new JButton("Logout");
 		logOut.addActionListener(new ActionListener() {
@@ -169,25 +196,26 @@ public class TaskBoardView extends JPanel{
 		//logOut.setBounds(700, 50, 75, 50);
 		toolbar.add(logOut);
 		
-		JPanel pan = new JPanel();
+		
 		BoxLayout boxlayout2 = new BoxLayout(pan, BoxLayout.X_AXIS);
 		pan.setLayout(boxlayout2);
-		pan.setBackground(Color.GREEN);
-		pan.setMaximumSize(new Dimension(800, 800));
+		//pan.setBackground(Color.GREEN);
+		pan.setMaximumSize(new Dimension(1000, 1000));
 		
 		add(pan);
 		
 
-		/*// addProjectButton
+		// addProjectButton
 		addProjectButton = new JButton("Add Project");
 		addProjectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Add Project
 				String name = JOptionPane.showInputDialog("Enter a name for the new project");
-				addProject(new ProjectModel(name));
+				//addProject(new ProjectModel(name));
 			}
 		});
-		add(addProjectButton, BorderLayout.SOUTH); */
+		add(addProjectButton, BorderLayout.SOUTH); 
+		
 		/*
 		projectBoxes = new JPanel();
 		projectBoxes.setLayout(null);
@@ -199,27 +227,27 @@ public class TaskBoardView extends JPanel{
 		int numProjects = 4;
 		
 		
-		ProgressModel prog1 = new ProgressModel("hi", 1);
-		ProgressModel prog2 = new ProgressModel("hi", 1);
-		ProgressModel prog3 = new ProgressModel("hi", 1);
-		ProgressModel prog4 = new ProgressModel("hi", 1);
+		ProgressModel prog1 = new ProgressModel("Behind", 1);
+		ProgressModel prog2 = new ProgressModel("In-Progress", 1);
+		ProgressModel prog3 = new ProgressModel("Almost Done", 1);
+		ProgressModel prog4 = new ProgressModel("Done", 1);
 		
 		
 
 		Calendar c = new GregorianCalendar();
 		Date date = new Date();
 		c.setTime(date);
-		TaskModel mod = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
-		TaskModel mod2 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
-		TaskModel mod3 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
-		TaskModel mod4 = new TaskModel("CS 151 Project", "A GUI Taskboard", c, "Behind");
+		TaskModel mod = new TaskModel("CS 151 Project", "A GUI taskboard", c, "Behind");
+		TaskModel mod2 = new TaskModel("CS 151 Studying for the Final ", "A cumulative test", c, "Behind");
+		TaskModel mod3 = new TaskModel("CS 151 JavaFx Lab", "A lab", c, "Behind");
+		TaskModel mod4 = new TaskModel("CS 151 HW 5", "Questions on stuff", c, "Behind");
 		
 		prog1.addTask(mod);
 		prog2.addTask(mod2);
 		prog3.addTask(mod3);
 		prog4.addTask(mod4);
 		
-		ProjectModel pmodel = new ProjectModel("CS 151");
+		
 		pmodel.addProgress(prog1);
 		pmodel.addProgress(prog2);
 		pmodel.addProgress(prog3);
