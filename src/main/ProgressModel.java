@@ -7,7 +7,7 @@ public class ProgressModel implements Comparable<ProgressModel>{
 	// Variables
 	private String status;
 	
-	//TODO set priority on construction
+	//TODO Verify that priority is set on construction. I.E. Newest ProgressModel should be the last in the list.
 	private int priority;
 	private ArrayList<TaskModel> taskList;
 	protected boolean selected;

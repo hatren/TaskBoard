@@ -27,7 +27,11 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	private ProgressModel model;
 	private ArrayList<TaskView> taskList;
 	private JLabel status;
+	
+	private JPanel buttonPanel;
 	private JButton addTaskButton;
+	private JButton editProgressButton;
+	private JButton deleteProgressButton;
 	private JPanel taskPanel;
 	private boolean on = false;
 	int counter = 0;
@@ -81,16 +85,43 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			taskPanel.add(taskView);
 		}
 		
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1,3));
+		buttonPanel.setBorder(BorderFactory.createEtchedBorder());
 		addTaskButton = new JButton("+");
 		addTaskButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CreateTaskView createTaskView = new CreateTaskView((ProgressView) addTaskButton.getParent());
 			}
 		});
-		add(addTaskButton, BorderLayout.SOUTH);
+		buttonPanel.add(addTaskButton);
+		editProgressButton = new JButton("Edit");
+		editProgressButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				EditProgressView editProgressView = new EditProgressView(getThis());
+			}
+		});
+		buttonPanel.add(editProgressButton);
+		deleteProgressButton = new JButton("-");
+		deleteProgressButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Figure out how to delete this. Prompt user to confirm the deletion or cancel.
+			}
+		});
+		buttonPanel.add(deleteProgressButton);
+		
+		
+		
+		add(buttonPanel, BorderLayout.SOUTH);
 		
 		// Test Border
 		this.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
+	public ProgressView getThis() {
+		return this;
 	}
 	
 	public ArrayList<TaskView> getTaskList(){

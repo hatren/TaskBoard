@@ -46,7 +46,6 @@ public class TaskModel implements Comparable<TaskModel>{
 		this.description = description;
 	}
 	
-	//TODO Fix how this this looks
 	public void setDate(Calendar dueDate) {
 		this.dueDate = dueDate;
 	}

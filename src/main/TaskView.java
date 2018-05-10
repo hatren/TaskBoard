@@ -66,6 +66,17 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	    buttonPanel.add(editButton);
 	    
 	    deleteButton = new JButton("Delete");
+	    deleteButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure you would like to delete this task?", "Deletion Prompt", JOptionPane.OK_CANCEL_OPTION);
+				if(input == 0) {
+					getProgressView().removeTask(getThis());
+				}
+			}
+	    	
+	    });
 	    buttonPanel.add(deleteButton);
 	    
 	    add(buttonPanel,BorderLayout.SOUTH);
@@ -110,6 +121,14 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	
 	public TaskModel getModel() {
 		return this.model;
+	}
+	
+	public TaskView getThis() {
+		return this;
+	}
+	
+	public ProgressView getProgressView() {
+		return (ProgressView) this.getParent().getParent();
 	}
 	
 	//TODO Status should be changed to something that corresponds to ProgressView/ProgressModel

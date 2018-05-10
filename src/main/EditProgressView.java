@@ -32,7 +32,7 @@ public class EditProgressView extends JFrame {
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
 		optionPanel.add(nameLabel);
 		
-		nameInput = new JTextArea();
+		nameInput = new JTextArea(progressView.getModel().getStatus());
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		

@@ -32,6 +32,8 @@ public class TaskBoardView extends JPanel{
 //	private JFrame buttonFrame;
 //	private JFrame mainFrame;
 	private JButton addProjectButton;
+	
+	//TODO Save the currentProject to this variable whenever a project is loaded
 	private ProjectView currentProject;
 	private ArrayList<ProjectView> projectList = new ArrayList<ProjectView>();
 	
@@ -278,15 +280,9 @@ public class TaskBoardView extends JPanel{
 		      out.close();
 	}
 	
-	// edits Object
+	// edits Project
 	public void edit() {
-		// Edit button will have to search for an object that is selected
-		// then pop up a frame dependent on the instance of that object
-		for(ProgressView progress: currentProject.getProgressList()) {
-			for(TaskView task: progress.getTaskList()) {
-				
-			}
-		}
+		EditProjectView editProjectView = new EditProjectView(currentProject);
 	}
 	
 	public ArrayList<ProjectModel> loadTasks() throws FileNotFoundException, IOException, ClassNotFoundException {
