@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,7 +92,12 @@ public class CreateTaskView extends JFrame {
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Return Model
-				addTask();
+				try {
+					addTask();
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -123,7 +129,7 @@ public class CreateTaskView extends JFrame {
 		return date;
 	}
 	// Creates the TaskModel from the input boxes and adds it
-	private void addTask() {
+	private void addTask() throws BadLocationException {
 		TaskModel task = new TaskModel(nameInput.getText(), descriptionInput.getText(), getDate(), statusInput.getText());
 		progressView.addTask(task);
 		dispose();

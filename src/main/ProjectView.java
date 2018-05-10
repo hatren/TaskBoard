@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 
 public class ProjectView extends JPanel {
 	// View Project Information
@@ -50,7 +51,7 @@ public class ProjectView extends JPanel {
 	}
 	
 	// addTask
-	public void addProgress(ProgressModel model) {
+	public void addProgress(ProgressModel model) throws BadLocationException {
 		// Remove All
 		for(ProgressView progress: progressList) {
 			this.remove(progress);
