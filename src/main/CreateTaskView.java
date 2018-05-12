@@ -39,7 +39,7 @@ public class CreateTaskView extends JFrame {
 		this.progressView = progressView;
 		
 		optionPanel = new JPanel();
-		optionPanel.setLayout(new GridLayout(5,2));
+		optionPanel.setLayout(new GridLayout(4,2));
 		
 		Border border = BorderFactory.createEtchedBorder();
 		
@@ -82,13 +82,13 @@ public class CreateTaskView extends JFrame {
 		
 		optionPanel.add(dueDatePanel);
 		
-		statusLabel = new JLabel("Status: ");
-		statusLabel.setBorder(border);
-		optionPanel.add(statusLabel);
-		
-		statusInput = new JTextArea();
-		statusInput.setBorder(border);
-		optionPanel.add(statusInput);
+//		statusLabel = new JLabel("Status: ");
+//		statusLabel.setBorder(border);
+//		optionPanel.add(statusLabel);
+//		
+//		statusInput = new JTextArea();
+//		statusInput.setBorder(border);
+//		optionPanel.add(statusInput);
 		
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
@@ -131,7 +131,7 @@ public class CreateTaskView extends JFrame {
 	}
 	// Creates the TaskModel from the input boxes and adds it
 	private void addTask() throws BadLocationException {
-		TaskModel task = new TaskModel(nameInput.getText(), descriptionInput.getText(), getDate(), statusInput.getText());
+		TaskModel task = new TaskModel(nameInput.getText(), descriptionInput.getText(), getDate(), progressView.getModel().getStatus());
 		progressView.addTask(task);
 		dispose();
 	}

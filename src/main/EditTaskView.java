@@ -86,6 +86,9 @@ public class EditTaskView extends JFrame {
 		
 		optionPanel.add(dueDatePanel);
 		
+		//TODO Fix status change for TaskView
+		// Make statusInput a combobox that lists all of the available progressViews
+		// Make it so that it will remove the taskView from the current progressView and add it to the new one
 		statusLabel = new JLabel("Status: ");
 		statusLabel.setBorder(border);
 		optionPanel.add(statusLabel);

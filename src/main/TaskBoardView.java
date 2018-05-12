@@ -71,8 +71,8 @@ public class TaskBoardView extends JPanel{
 		this.prev = prev;
 		
 		
-		ProjectModel pmodel = new ProjectModel("CS 151");
-		projectList2.add(pmodel);
+//		ProjectModel pmodel = new ProjectModel("CS 151");
+//		projectList2.add(pmodel);
 		
 		//For the progress views
 		final JPanel pan = new JPanel();
@@ -159,14 +159,20 @@ public class TaskBoardView extends JPanel{
 		load = new JButton("Load");
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					ArrayList<ProjectModel> pjm = loadTasks();
-					for(ProjectModel pm: pjm) {
-						addProject(pm);
-					}
-				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
-				}
+				getThis().remove(currentProject);
+				add(findProject(projectDropDown.getItemAt(projectDropDown.getSelectedIndex())));
+				getThis().validate();
+				getThis().repaint();
+				
+				
+//				try {
+//					ArrayList<ProjectModel> pjm = loadTasks();
+//					for(ProjectModel pm: pjm) {
+//						addProject(pm);
+//					}
+//				} catch (ClassNotFoundException | IOException e) {
+//					e.printStackTrace();
+//				}
 				
 			}
 		});
@@ -176,8 +182,7 @@ public class TaskBoardView extends JPanel{
 		createProject = new JButton("New Project");
 		createProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+				CreateProjectView createProjectView = new CreateProjectView(getThis());
 			}
 		});
 		//createNew.setBounds(625, 50, 75, 50);
@@ -186,11 +191,10 @@ public class TaskBoardView extends JPanel{
 		createProgress = new JButton("New Progress");
 		createProgress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProjectView prog = new ProjectView(projectList2.get(0));
+//				ProjectView prog = new ProjectView(projectList2.get(0));
 				try {
-					CreateProgressView view = new CreateProgressView(prog);
+					CreateProgressView view = new CreateProgressView(currentProject);
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -209,7 +213,6 @@ public class TaskBoardView extends JPanel{
 			    try {
 					MainScreen.main(arguments);
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -227,15 +230,16 @@ public class TaskBoardView extends JPanel{
 		
 
 		// addProjectButton
-		addProjectButton = new JButton("Add Project");
-		addProjectButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// Add Project
-				String name = JOptionPane.showInputDialog("Enter a name for the new project");
-				//addProject(new ProjectModel(name));
-			}
-		});
-		add(addProjectButton, BorderLayout.SOUTH); 
+//		addProjectButton = new JButton("Add Project");
+//		addProjectButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				// Add Project
+////				String name = JOptionPane.showInputDialog("Enter a name for the new project");
+//				//addProject(new ProjectModel(name));
+//				CreateProjectView createProjectView = new CreateProjectView(getThis());
+//			}
+//		});
+//		add(addProjectButton, BorderLayout.SOUTH); 
 		
 		/*
 		projectBoxes = new JPanel();
@@ -245,43 +249,43 @@ public class TaskBoardView extends JPanel{
 		
 		
 		//Convert this to MVC stuff
-		int numProjects = 4;
+//		int numProjects = 4;
 		
 		
-		ProgressModel prog1 = new ProgressModel("Behind", 1);
-		ProgressModel prog2 = new ProgressModel("In-Progress", 1);
-		ProgressModel prog3 = new ProgressModel("Almost Done", 1);
-		ProgressModel prog4 = new ProgressModel("Done", 1);
+//		ProgressModel prog1 = new ProgressModel("Behind", 1);
+//		ProgressModel prog2 = new ProgressModel("In-Progress", 1);
+//		ProgressModel prog3 = new ProgressModel("Almost Done", 1);
+//		ProgressModel prog4 = new ProgressModel("Done", 1);
 		
 		
 
-		Calendar c = new GregorianCalendar();
-		Date date = new Date();
-		c.setTime(date);
-		TaskModel mod = new TaskModel("CS 151 Project", "A GUI taskboard", c, "Behind");
-		TaskModel mod2 = new TaskModel("CS 151 Studying for the Final ", "A cumulative test", c, "Behind");
-		TaskModel mod3 = new TaskModel("CS 151 JavaFx Lab", "A lab", c, "Behind");
-		TaskModel mod4 = new TaskModel("CS 151 HW 5", "Questions on stuff", c, "Behind");
+//		Calendar c = new GregorianCalendar();
+//		Date date = new Date();
+//		c.setTime(date);
+//		TaskModel mod = new TaskModel("CS 151 Project", "A GUI taskboard", c, "Behind");
+//		TaskModel mod2 = new TaskModel("CS 151 Studying for the Final ", "A cumulative test", c, "Behind");
+//		TaskModel mod3 = new TaskModel("CS 151 JavaFx Lab", "A lab", c, "Behind");
+//		TaskModel mod4 = new TaskModel("CS 151 HW 5", "Questions on stuff", c, "Behind");
 		
-		prog1.addTask(mod);
-		prog2.addTask(mod2);
-		prog3.addTask(mod3);
-		prog4.addTask(mod4);
+//		prog1.addTask(mod);
+//		prog2.addTask(mod2);
+//		prog3.addTask(mod3);
+//		prog4.addTask(mod4);
+//		
 		
+//		pmodel.addProgress(prog1);
+//		pmodel.addProgress(prog2);
+//		pmodel.addProgress(prog3);
+//		pmodel.addProgress(prog4);
 		
-		pmodel.addProgress(prog1);
-		pmodel.addProgress(prog2);
-		pmodel.addProgress(prog3);
-		pmodel.addProgress(prog4);
+//		model.addProject(pmodel);
 		
-		model.addProject(pmodel);
-		
-		for(int i = 0; i < pmodel.progressSize(); i++) {
-			ProgressModel prog = pmodel.getProgressList().get(i);
-			ProgressView view = new ProgressView(prog);
-			
-			
-			pan.add(view);
+//		for(int i = 0; i < pmodel.progressSize(); i++) {
+//			ProgressModel prog = pmodel.getProgressList().get(i);
+//			ProgressView view = new ProgressView(prog);
+//			
+//			
+//			pan.add(view);
 			
 			
 			/* JPanel project = new JPanel();
@@ -308,15 +312,25 @@ public class TaskBoardView extends JPanel{
 			
 			//project.setBounds(50 + (150 * i), 500, 150, 500);
 			pan.add(project);  */
-		}   
+//		}   
 		
+	}
+	
+	public TaskBoardView getThis() {
+		return this;
 	}
 	
 	public void addProject(ProjectModel model) {
 		this.model.addProject(model);
 		ProjectView projectView = new ProjectView(model);
 		projectList.add(projectView);
+		if(currentProject != null) {
+			this.remove(currentProject);
+		}
 		add(projectView, BorderLayout.CENTER);
+		currentProject = projectView;
+		projectDropDown.addItem(model.getName());
+		validate();
 	}
 	
 	public void removeProject(ProjectModel model) {
@@ -324,6 +338,16 @@ public class TaskBoardView extends JPanel{
 		
 		// This most likely doesn't work
 		projectList.remove(new ProjectView(model));
+	}
+	
+	public ProjectView findProject(String name) {
+		ProjectView searched = null;
+		for(ProjectView projectView: projectList) {
+			if(projectView.getModel().getName() == name) {
+				searched = projectView;
+			}
+		}
+		return searched;
 	}
 	
 	public void saveTasks() throws FileNotFoundException, IOException {

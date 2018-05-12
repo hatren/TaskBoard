@@ -13,6 +13,7 @@ public class MainScreen extends JPanel {
 	//private JFrame frame = new JFrame();
 	static CardLayout layout = new CardLayout();
 	static TaskBoardView taskboardView = null;
+	
 	public static void main(String[] args) throws BadLocationException{
 		JFrame frame = new JFrame();
 		frame.setLayout(layout);
@@ -28,6 +29,8 @@ public class MainScreen extends JPanel {
 		
 		
 		frame.getContentPane().add(loginView, "Card 1");
+		
+		frame.validate();
 		/*while(loginView.isAuthenticated() == false) {
 			
 		}
@@ -54,7 +57,6 @@ public class MainScreen extends JPanel {
 		//TODO Differentiate between CreateProject, CreateProgress, CreateTask. Maybe use a comboBox or popup frame
 		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask. 
 		// - I don't think we need Delete classes if we use setVisible(false)
-		
 		
 	}
 	/*

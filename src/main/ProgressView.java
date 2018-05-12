@@ -111,13 +111,13 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			}
 		});
 		buttonPanel.add(editProgressButton);
-		deleteProgressButton = new JButton("-");
+		deleteProgressButton = new JButton("DELTE MEALKFDS");
 		deleteProgressButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Figure out how to delete this. Prompt user to confirm the deletion or cancel.
-				
-				pan.setVisible(false);
+				((ProjectView) getThis().getParent()).removeProgress(getThis());
+//				pan.setVisible(false);
 			}
 		});
 		buttonPanel.add(deleteProgressButton);
@@ -140,20 +140,18 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	
 	// addTask
 	public void addTask(TaskModel model) throws BadLocationException {
-		// Remove all
+		// Remove all from Panel
 		for(TaskView view: taskList) {
 			taskPanel.remove(view);
 		}
 		
-		// Add
+		// Add and sort ArrayList
 		this.model.addTask(model);
 		TaskView taskView = new TaskView(model);
-		taskPanel.add(taskView);
-		
-		// Sort ArrayList
+		taskList.add(taskView);
 		Collections.sort(taskList);
 		
-		// Add all
+		// Add all to Panel
 		for(TaskView view: taskList) {
 			taskPanel.add(view);
 		}
@@ -171,6 +169,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		}
 		
 		// Remove and Sort ArrayList
+		this.model.removeTask(task.getModel());
 		taskList.remove(task);
 		Collections.sort(taskList);
 		

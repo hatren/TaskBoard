@@ -91,6 +91,7 @@ public class LoginView extends JPanel{
 		});
 		loginButton.setBounds(350, 200, 100, 50);
 		login.add(loginButton);
+		
 	}
 	
 	// Check Login information from text boxes

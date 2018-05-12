@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,8 +18,7 @@ public class ProjectView extends JPanel {
 	// View Project Information
 	private ProjectModel projectModel;
 	private ArrayList<ProgressView> progressList = new ArrayList<ProgressView>();
-	private JTextArea name;
-	private JButton addProgressButton;
+//	private JTextArea name;
 	
 	// Constructor
 	public ProjectView(ProjectModel projectModel) {
@@ -26,7 +26,9 @@ public class ProjectView extends JPanel {
 		this.projectModel = projectModel;
 		
 		// Add Name Text
-		name = new JTextArea(projectModel.getName());
+//		name = new JTextArea(projectModel.getName());
+		
+		setBorder(BorderFactory.createTitledBorder(projectModel.getName()));
 		/* add(name);
 		
 		// Add ProgressViews
@@ -46,8 +48,8 @@ public class ProjectView extends JPanel {
 		// Test Border
 		this.setBorder(BorderFactory.createRaisedBevelBorder()); */ 
 		
-		JPanel project = new JPanel();
-		project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
+//		JPanel project = new JPanel();
+//		project.setLayout(new BoxLayout(project, BoxLayout.Y_AXIS));
 	}
 	
 	public ProjectModel getModel() {
@@ -72,9 +74,12 @@ public class ProjectView extends JPanel {
 		Collections.sort(progressList);
 		
 		// Show All
+		this.setLayout(new GridLayout(1, progressList.size()));
 		for(ProgressView progress: progressList) {
 			this.add(progress);
 		}
+		
+		validate();
 	}
 	
 	// removeTask
@@ -89,9 +94,20 @@ public class ProjectView extends JPanel {
 		Collections.sort(progressList);
 				
 		// Add All to JPanel
-		for(ProgressView progress: progressList) {
-			this.add(progress);
+		
+		//TODO Fix removeProgress to work with only 1 progressView
+		// If there is only 1 progressView, it removes the last progressView, but still shows up. 
+		// If you add another progressView, it will replace the last one.
+		if(progressList.size() == 0) {
+			this.setLayout(new GridLayout(1,1));
+		}else {
+			this.setLayout(new GridLayout(1, progressList.size()));
+			for(ProgressView progress: progressList) {
+				this.add(progress);
+			}
 		}
+		
+		validate();
 	}
 	
 	public void sort() {
