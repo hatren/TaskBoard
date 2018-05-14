@@ -28,6 +28,7 @@ public class LoginView extends JPanel{
 	private JTextField usernameEdit;
 	private JLabel passwordTitle;
 	private JPasswordField passwordEdit;
+	private JLabel wrongPassword;
 	
 	private JFrame frame;
 	private TaskBoardView view;
@@ -83,6 +84,14 @@ public class LoginView extends JPanel{
 		passwordEdit.setBounds(250, 100, 200, 50);
 		login.add(passwordEdit);
 		
+		wrongPassword = new JLabel("Wrong username or password!");
+		wrongPassword.setHorizontalAlignment(JLabel.CENTER);
+		wrongPassword.setVerticalAlignment(JLabel.CENTER);
+		wrongPassword.setBounds(300, 150, 200, 50);
+		wrongPassword.setVisible(false);
+		wrongPassword.setForeground(Color.RED);
+		login.add(wrongPassword);
+		
 		loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -109,7 +118,7 @@ public class LoginView extends JPanel{
 			
 		}
 		else {
-			mainTitle.setText("Fail");
+			wrongPassword.setVisible(true);
 		}
 	}
 	

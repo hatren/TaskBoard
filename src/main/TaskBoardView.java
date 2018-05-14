@@ -144,7 +144,11 @@ public class TaskBoardView extends JPanel{
 		delete = new JButton("Delete");
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pan.setVisible(false);
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure you would like to delete this Project?", "Deletion Prompt", JOptionPane.OK_CANCEL_OPTION);
+				if(input == 0) {
+					//getProgressView().removeTask(getThis());
+					currentProject.setVisible(false);
+				}
 				
 			}
 		});

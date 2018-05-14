@@ -16,6 +16,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.text.*;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 public class TaskView extends JPanel implements Comparable<TaskView>{
 	// Variables
 	private TaskModel model;
@@ -40,6 +44,7 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 //		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setLayout(new BorderLayout());
 		this.setMaximumSize(new Dimension(250, 250));
+	
 		
 		this.status = model.getStatus();
 		name_and_date = model.getName()+ " - " + model;
@@ -52,6 +57,8 @@ public class TaskView extends JPanel implements Comparable<TaskView>{
 	    document.insertString(document.getLength(), (name_and_date+"\n"+description), style);
 		tasks = new JTextPane(document);
 		tasks.setEditable(false);
+		
+		
 		
 //		setData();
 		

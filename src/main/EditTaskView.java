@@ -6,9 +6,15 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Properties;
 
 public class EditTaskView extends JFrame {
 	private TaskView taskView;
@@ -27,6 +33,8 @@ public class EditTaskView extends JFrame {
 	private JTextArea monthInput;
 	private JTextArea yearInput;
 	
+	JDatePickerImpl datePicker;
+	
 	private JLabel statusLabel;
 	private JTextArea statusInput;
 	private JButton editButton;
@@ -38,7 +46,7 @@ public class EditTaskView extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		optionPanel = new JPanel();
-		optionPanel.setLayout(new GridLayout(5,2));
+		optionPanel.setLayout(new GridLayout(6,2));
 		
 		Border border = BorderFactory.createEtchedBorder();
 		
@@ -63,13 +71,32 @@ public class EditTaskView extends JFrame {
 		descriptionInput.setBorder(border);
 		optionPanel.add(descriptionInput);
 		
+	
+		
+		
+		
+		
 		// dueDateLabel
 		dueDateLabel = new JLabel("Due Date: ");
 		dueDateLabel.setBorder(border);
 		optionPanel.add(dueDateLabel);
 		
+		UtilDateModel model = new UtilDateModel();
+		//model.setDate(20,04,2014);
+		// Need this...
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		// Don't know about the formatter, but there it is...
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		optionPanel.add(datePicker);
+		String hi = datePicker.getJFormattedTextField().getText();
+
+		Calendar selectedValue = (Calendar) datePicker.getModel().getValue();
 		// dueDateInput
-		dueDatePanel = new JPanel();
+		/*dueDatePanel = new JPanel();
 		dueDatePanel.setLayout(new GridLayout(1,3));
 		
 		dayInput = new JTextArea(Integer.toString(taskView.getModel().getDate().DAY_OF_MONTH));
@@ -84,7 +111,7 @@ public class EditTaskView extends JFrame {
 		yearInput.setBorder(border);
 		dueDatePanel.add(yearInput);
 		
-		optionPanel.add(dueDatePanel);
+		optionPanel.add(dueDatePanel);*/
 		
 		//TODO Fix status change for TaskView
 		// Make statusInput a combobox that lists all of the available progressViews
@@ -128,12 +155,17 @@ public class EditTaskView extends JFrame {
 	
 	// Gets the date from the inputs
 	private Calendar getDate() {
-		int day = Integer.parseInt(dayInput.getText());
+		/*int day = Integer.parseInt(dayInput.getText());
 		int month = Integer.parseInt(monthInput.getText());
 		int year = Integer.parseInt(yearInput.getText());
 		Calendar date = Calendar.getInstance();
+		date.set(year, month, day);*/ 
+		int day =  datePicker.getModel().getDay();
+		int month =  datePicker.getModel().getMonth();
+		int year =  datePicker.getModel().getYear();
+		Calendar date = new GregorianCalendar(year, month, day);
 		date.set(year, month, day);
-		return date;
+		return date; 
 	}
 	// Creates the TaskModel from the input boxes and adds it
 	private void editTask() throws BadLocationException {
