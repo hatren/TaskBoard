@@ -21,14 +21,14 @@ public class MainScreen extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		taskboardView = new TaskBoardView(frame);
-		//frame.add(taskboardView, "Card 2");
+		frame.add(taskboardView, "Card 2");
 		
 		
 		
-		LoginView loginView = new LoginView(frame, taskboardView);
+		//LoginView loginView = new LoginView(frame, taskboardView);
 		
 		
-		frame.getContentPane().add(loginView, "Card 1");
+		//frame.getContentPane().add(loginView, "Card 1");
 		
 		frame.validate();
 		/*while(loginView.isAuthenticated() == false) {

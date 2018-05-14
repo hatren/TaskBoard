@@ -110,12 +110,7 @@ public class TaskBoardView extends JPanel{
 		projectDropDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) projectDropDown.getSelectedItem();
-				
-				switch(selected) {
-					default:
-						
-				}
-				
+						currentProject = findProject(selected);
 			}
 		});
 		
@@ -159,20 +154,25 @@ public class TaskBoardView extends JPanel{
 		load = new JButton("Load");
 		load.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				getThis().remove(currentProject);
-				add(findProject(projectDropDown.getItemAt(projectDropDown.getSelectedIndex())));
-				getThis().validate();
-				getThis().repaint();
+				//getThis().remove(currentProject);
+				//add(findProject(projectDropDown.getItemAt(projectDropDown.getSelectedIndex())));
+				//getThis().validate();
+				//getThis().repaint();
 				
 				
-//				try {
-//					ArrayList<ProjectModel> pjm = loadTasks();
-//					for(ProjectModel pm: pjm) {
-//						addProject(pm);
-//					}
-//				} catch (ClassNotFoundException | IOException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					ArrayList<ProjectModel> pjm = loadTasks();
+					for(ProjectModel pm: pjm) {
+						addProject(pm);
+						for(ProgressModel prog: pm.getProgressList()) {
+							for(TaskModel tm: prog.getTaskList()) {
+								System.out.println(tm);
+							}
+						}
+					}
+					} catch (ClassNotFoundException | IOException e) {
+					e.printStackTrace();
+				}
 				
 			}
 		});
@@ -343,7 +343,7 @@ public class TaskBoardView extends JPanel{
 	public ProjectView findProject(String name) {
 		ProjectView searched = null;
 		for(ProjectView projectView: projectList) {
-			if(projectView.getModel().getName() == name) {
+			if(projectView.getModel().getName().equals(name)) {
 				searched = projectView;
 			}
 		}
@@ -366,13 +366,7 @@ public class TaskBoardView extends JPanel{
 		ObjectInputStream in = new ObjectInputStream(
 		         new FileInputStream(model.getFileName())); 
 		ArrayList<ProjectModel> savedModels =  (ArrayList<ProjectModel>) in.readObject();
-		for(ProjectModel pm: savedModels) {
-			for(ProgressModel prog: pm.getProgressList()) {
-				for(TaskModel tm: prog.getTaskList()) {
-					System.out.println(tm);
-				}
-			}
-		}
+		
 		return savedModels;
 	}
 	

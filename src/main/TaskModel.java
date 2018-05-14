@@ -77,7 +77,7 @@ public class TaskModel implements Comparable<TaskModel>, Serializable{
 		Calendar c = new GregorianCalendar();
 		Date date = new Date();
 		c.setTime(date);
-		TaskModel tm = new TaskModel("title shit","descriptive shit",c,"some shiz");
+		TaskModel tm = new TaskModel("title","descriptive",c,"some");
 		System.out.println(tm);
 	}
 }
