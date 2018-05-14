@@ -10,24 +10,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreateProjectView extends JFrame {
+	// Variables
 	private TaskBoardView taskBoardView;
-	
-	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
 	private JLabel nameLabel;
 	private JTextArea nameInput;
-
 	private JButton addButton;
 	private JButton exitButton;
 	
+	// Constructor
 	public CreateProjectView(TaskBoardView taskBoardView) {
 		this.taskBoardView = taskBoardView;
 		
+		// Layout
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(2,2));
-		
 		Border border = BorderFactory.createEtchedBorder();
 		
+		// Name
 		nameLabel = new JLabel("Name: ");
 		nameLabel.setBorder(border);
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -37,6 +37,7 @@ public class CreateProjectView extends JFrame {
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		
+		// Add Button
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -45,6 +46,7 @@ public class CreateProjectView extends JFrame {
 			}
 		});
 		
+		// Exit Button
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,7 +60,7 @@ public class CreateProjectView extends JFrame {
 		add(optionPanel);
 		
 		setSize(300, 120);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -72,12 +74,5 @@ public class CreateProjectView extends JFrame {
 	// Closes the frame
 	private void close() {
 		this.dispose();
-	}
-	
-//	 Main test
-	public static void main(String[] args) throws BadLocationException {
-		TaskBoardView test = new TaskBoardView(null);
-		
-		CreateProjectView test2 = new CreateProjectView(test);
 	}
 }

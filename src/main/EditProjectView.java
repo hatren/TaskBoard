@@ -13,20 +13,17 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class EditProjectView extends JFrame {
-
+	// Variables
 	private ProjectView projectView;
-	
 	private JPanel outerPanel;
-	
 	private DefaultListModel<ProgressModel> progressListModel;
 	private JList<ProgressModel> progressList;
-	
 	private JPanel topButtonPanel;
 	private JButton upButton;
 	private JButton downButton;
-
 	private JButton exitButton;
 
+	// Constructor
 	public EditProjectView(ProjectView projectView) {
 		this.projectView = projectView;
 		
@@ -80,20 +77,17 @@ public class EditProjectView extends JFrame {
 		
 		this.add(outerPanel);
 		this.setSize(300, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 	
+	// swap()
 	public void swap(ProgressModel arg0, ProgressModel arg1) {
 		progressListModel.set(progressListModel.indexOf(arg0), arg1);
 		progressListModel.set(progressListModel.indexOf(arg1), arg0);
-		
-//		int temp = arg1.getPriority();
-//		arg1.setPriority(arg0.getPriority());
-//		arg0.setPriority(temp);
 	}
 	
-	// raisePriority()
+	// Raises the priority and index of a selection
 	public void raisePriority() {
 		if(progressList.getSelectedIndex() != 0) {
 			ProgressModel arg0 = progressList.getSelectedValue();
@@ -105,7 +99,7 @@ public class EditProjectView extends JFrame {
 		}
 	}
 	
-	// lowerPriority()
+	// Lowers the priority and index of a selection
 	public void lowerPriority() {
 		if(progressList.getSelectedIndex() != progressListModel.size() - 1) {
 			ProgressModel arg0 = progressListModel.elementAt(progressList.getSelectedIndex() + 1);

@@ -9,24 +9,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EditProgressView extends JFrame {
+	// Variables
 	private ProgressView progressView;
-	
-	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
 	private JLabel nameLabel;
 	private JTextArea nameInput;
-
 	private JButton addButton;
 	private JButton exitButton;
 	
+	// Constructor
 	public EditProgressView(ProgressView progressView) {
 		this.progressView = progressView;
 		
+		// Layout
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(2,2));
-		
 		Border border = BorderFactory.createEtchedBorder();
 		
+		// Name
 		nameLabel = new JLabel("Name: ");
 		nameLabel.setBorder(border);
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -36,6 +36,7 @@ public class EditProgressView extends JFrame {
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		
+		// Add Button
 		addButton = new JButton("Edit");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -44,6 +45,7 @@ public class EditProgressView extends JFrame {
 			}
 		});
 		
+		// Exit Button
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

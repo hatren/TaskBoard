@@ -45,16 +45,12 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	public ProgressView(ProgressModel model) throws BadLocationException {
 		// Initialize
 		this.model = model;
-		
-		
-		
 		this.setLayout(new BorderLayout());
 		
 		// Add Status Text
 		status = new JLabel(model.getStatus());
 		status.setHorizontalAlignment(JLabel.CENTER);
 		status.setVerticalAlignment(JLabel.CENTER);
-		//status.setBorder(BorderFactory.createLineBorder(Color.RED, 5)); 
 		status.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				/*counter++;

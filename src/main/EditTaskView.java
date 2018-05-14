@@ -25,41 +25,33 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class EditTaskView extends JFrame {
+	// Variables
 	private TaskView taskView;
-	
-	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
 	private JLabel nameLabel;
 	private JTextArea nameInput;
 	private JLabel descriptionLabel;
 	private JTextArea descriptionInput;
-	
-	// Used for Date
+
 	private JLabel dueDateLabel;
-	private JPanel dueDatePanel;
-	private JTextArea dayInput;
-	private JTextArea monthInput;
-	private JTextArea yearInput;
 	
 	JDatePickerImpl datePicker;
 	
 	private JLabel statusLabel;
-//	private JTextArea statusInput;
 	private JComboBox<String> statusInput;
 	private JButton editButton;
 	private JButton exitButton;
 	
 	private ProjectView projectView;
 	
+	// Constructor
 	public EditTaskView(TaskView taskView) {
 		this.taskView = taskView;
 		this.projectView = (ProjectView) taskView.getParent().getParent().getParent();
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		// Layout
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(5,2));
-		
 		Border border = BorderFactory.createEtchedBorder();
 		
 		// nameLabel
@@ -83,11 +75,6 @@ public class EditTaskView extends JFrame {
 		descriptionInput.setBorder(border);
 		optionPanel.add(descriptionInput);
 		
-	
-		
-		
-		
-		
 		// dueDateLabel
 		dueDateLabel = new JLabel("Due Date: ");
 		dueDateLabel.setBorder(border);
@@ -107,32 +94,12 @@ public class EditTaskView extends JFrame {
 		String hi = datePicker.getJFormattedTextField().getText();
 
 		Calendar selectedValue = (Calendar) datePicker.getModel().getValue();
-		// dueDateInput
-		/*dueDatePanel = new JPanel();
-		dueDatePanel.setLayout(new GridLayout(1,3));
 		
-		dayInput = new JTextArea(Integer.toString(taskView.getModel().getDate().DAY_OF_MONTH));
-		dayInput.setBorder(border);
-		dueDatePanel.add(dayInput);
-		
-		monthInput = new JTextArea(Integer.toString(taskView.getModel().getDate().MONTH));
-		monthInput.setBorder(border);
-		dueDatePanel.add(monthInput);
-		
-		yearInput = new JTextArea(Integer.toString(taskView.getModel().getDate().YEAR));
-		yearInput.setBorder(border);
-		dueDatePanel.add(yearInput);
-		
-		optionPanel.add(dueDatePanel);*/
-		
-		//TODO Fix status change for TaskView
-		// Make statusInput a combobox that lists all of the available progressViews
-		// Make it so that it will remove the taskView from the current progressView and add it to the new one
+		// ComboBox
 		statusLabel = new JLabel("Progress: ");
 		statusLabel.setBorder(border);
 		optionPanel.add(statusLabel);
-		
-//		statusInput = new JTextArea(taskView.getModel().getStatus());
+
 		statusInput = new JComboBox<String>();
 		statusInput.setModel(new DefaultComboBoxModel<String>());
 		for(ProgressView progressView: projectView.getProgressList()) {
@@ -142,6 +109,7 @@ public class EditTaskView extends JFrame {
 		statusInput.setBorder(border);
 		optionPanel.add(statusInput);
 		
+		// Edit Button
 		editButton = new JButton("Edit");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -154,6 +122,7 @@ public class EditTaskView extends JFrame {
 			}
 		});
 		
+		// Exit Button
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -173,11 +142,6 @@ public class EditTaskView extends JFrame {
 	
 	// Gets the date from the inputs
 	private Calendar getDate() {
-		/*int day = Integer.parseInt(dayInput.getText());
-		int month = Integer.parseInt(monthInput.getText());
-		int year = Integer.parseInt(yearInput.getText());
-		Calendar date = Calendar.getInstance();
-		date.set(year, month, day);*/ 
 		int day =  datePicker.getModel().getDay();
 		int month =  datePicker.getModel().getMonth();
 		int year =  datePicker.getModel().getYear();
@@ -197,8 +161,6 @@ public class EditTaskView extends JFrame {
 		
 		// Status
 		projectView.findProgress((String) statusInput.getSelectedItem()).addTask(taskView.getModel());
-		
-		
 		((ProgressView) taskView.getParent().getParent()).removeTask(taskView);
 		
 		// Edit View
@@ -210,11 +172,4 @@ public class EditTaskView extends JFrame {
 	private void close() {
 		this.dispose();
 	}
-	
-//	 Main test
-//	public static void main(String[] args) throws BadLocationException {
-//		TaskModel testModel = new TaskModel("Name test", "Description test", Calendar.getInstance(), "Status test");
-//		TaskView testView = new TaskView(testModel);
-//		EditTaskView editView = new EditTaskView(testView);
-//	}
 }

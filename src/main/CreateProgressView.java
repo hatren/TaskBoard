@@ -10,24 +10,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreateProgressView extends JFrame {
+	// Variables
 	private ProjectView projectView;
-	
-	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
 	private JLabel nameLabel;
 	private JTextArea nameInput;
-
 	private JButton addButton;
 	private JButton exitButton;
 	
+	// Constructor
 	public CreateProgressView(ProjectView projectView) throws BadLocationException {
 		this.projectView = projectView;
 		
+		// Layout
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(2,2));
-		
 		Border border = BorderFactory.createEtchedBorder();
 		
+		// Name
 		nameLabel = new JLabel("Name: ");
 		nameLabel.setBorder(border);
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -37,6 +37,7 @@ public class CreateProgressView extends JFrame {
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		
+		// AddButton
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -49,6 +50,7 @@ public class CreateProgressView extends JFrame {
 			}
 		});
 		
+		// ExitButton
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -62,7 +64,7 @@ public class CreateProgressView extends JFrame {
 		add(optionPanel);
 		
 		setSize(300, 120);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -77,11 +79,4 @@ public class CreateProgressView extends JFrame {
 	private void close() {
 		this.dispose();
 	}
-	
-//	 Main test
-//	public static void main(String[] args) {
-//		ProjectView test = new ProjectView(new ProjectModel("meme"));
-//		
-//		CreateProgressView test2 = new CreateProgressView(test);
-//	}
 }

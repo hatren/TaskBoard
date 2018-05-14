@@ -19,37 +19,28 @@ import java.util.GregorianCalendar;
 import java.util.Properties;
 
 public class CreateTaskView extends JFrame {
+	// Variables
 	private ProgressView progressView;
-	
-	// Used to type in fields when creating a TaskModel
 	private JPanel optionPanel;
 	private JLabel nameLabel;
 	private JTextArea nameInput;
 	private JLabel descriptionLabel;
 	private JTextArea descriptionInput;
-	
-	// Used for Date
 	private JLabel dueDateLabel;
-	private JPanel dueDatePanel;
-	private JTextArea dayInput;
-	private JTextArea monthInput;
-	private JTextArea yearInput;
-	
 	JDatePickerImpl datePicker;
-	
-	private JLabel statusLabel;
-	private JTextArea statusInput;
 	private JButton addButton;
 	private JButton exitButton;
 	
+	// Constructor
 	public CreateTaskView(ProgressView progressView) {
 		this.progressView = progressView;
 		
+		// Layout
 		optionPanel = new JPanel();
 		optionPanel.setLayout(new GridLayout(4,2));
-		
 		Border border = BorderFactory.createEtchedBorder();
 		
+		// Name
 		nameLabel = new JLabel("Name: ");
 		nameLabel.setBorder(border);
 		nameLabel.setAlignmentX(LEFT_ALIGNMENT);
@@ -59,6 +50,7 @@ public class CreateTaskView extends JFrame {
 		nameInput.setBorder(border);
 		optionPanel.add(nameInput);
 		
+		// Description
 		descriptionLabel = new JLabel("Description: ");
 		descriptionLabel.setBorder(border);
 		optionPanel.add(descriptionLabel);
@@ -67,7 +59,7 @@ public class CreateTaskView extends JFrame {
 		descriptionInput.setBorder(border);
 		optionPanel.add(descriptionInput);
 		
-		
+		// Date
 		dueDateLabel = new JLabel("Due Date: ");
 		dueDateLabel.setBorder(border);
 		optionPanel.add(dueDateLabel);
@@ -84,32 +76,7 @@ public class CreateTaskView extends JFrame {
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		optionPanel.add(datePicker);
 		
-		
-		/*dueDatePanel = new JPanel();
-		dueDatePanel.setLayout(new GridLayout(1,3));
-		
-		dayInput = new JTextArea();
-		dayInput.setBorder(border);
-		dueDatePanel.add(dayInput);
-		
-		monthInput = new JTextArea();
-		monthInput.setBorder(border);
-		dueDatePanel.add(monthInput);
-		
-		yearInput = new JTextArea();
-		yearInput.setBorder(border);
-		dueDatePanel.add(yearInput);
-		
-		optionPanel.add(dueDatePanel); */
-		
-//		statusLabel = new JLabel("Status: ");
-//		statusLabel.setBorder(border);
-//		optionPanel.add(statusLabel);
-//		
-//		statusInput = new JTextArea();
-//		statusInput.setBorder(border);
-//		optionPanel.add(statusInput);
-		
+		// Add Button
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -122,6 +89,7 @@ public class CreateTaskView extends JFrame {
 			}
 		});
 		
+		// Exit Button
 		exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -136,7 +104,7 @@ public class CreateTaskView extends JFrame {
 		add(optionPanel);
 		
 		setSize(300, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -165,11 +133,5 @@ public class CreateTaskView extends JFrame {
 	// Closes the frame
 	private void close() {
 		this.dispose();
-	}
-	
-//	 Main test
-	public static void main(String[] args) throws BadLocationException {
-		ProgressView test = new ProgressView(new ProgressModel("test", 0));
-		CreateTaskView test2 = new CreateTaskView(test);
 	}
 }

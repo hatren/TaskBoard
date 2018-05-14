@@ -42,21 +42,11 @@ public class MainScreen extends JPanel {
 		frame.getContentPane().removeAll();
 		frame.add(taskboardView, "Card 2"); */
 		
-		
-		
-		
-		
-		
-		
-
 		//cardLayout cardLayout = (CardLayout) frame.getLayout();
 		//cardLayout.show(frame, "Card 2");
 		
 		//TODO Implement Saving
 		//TODO Implement Loading w/ ComboBox
-		//TODO Differentiate between CreateProject, CreateProgress, CreateTask. Maybe use a comboBox or popup frame
-		//TODO Differentiate between DeleteProject, DeleteProgress, DeleteTask. 
-		// - I don't think we need Delete classes if we use setVisible(false)
 		
 	}
 	/*
