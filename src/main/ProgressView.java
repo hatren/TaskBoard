@@ -111,7 +111,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			}
 		});
 		buttonPanel.add(editProgressButton);
-		deleteProgressButton = new JButton("DELTE MEALKFDS");
+		deleteProgressButton = new JButton("-");
 		deleteProgressButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -165,7 +165,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 	public void removeTask(TaskView task) {
 		// Remove Views From JPanel
 		for(TaskView view: taskList) {
-			this.remove(view);
+			taskPanel.remove(view);
 		}
 		
 		// Remove and Sort ArrayList
@@ -175,8 +175,10 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		
 		// Add all
 		for(TaskView view: taskList) {
-			this.add(view);
+			taskPanel.add(view);
 		}
+		taskPanel.validate();
+		taskPanel.repaint();
 	}
 	
 	// Setters

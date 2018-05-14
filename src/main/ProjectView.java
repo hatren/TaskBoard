@@ -110,6 +110,17 @@ public class ProjectView extends JPanel {
 		validate();
 	}
 	
+	// Returns ProgressView given String
+	public ProgressView findProgress(String name) {
+		ProgressView searched = null;
+		for(ProgressView progressView: progressList) {
+			if(name.equals(progressView.getModel().getStatus())) {
+				searched = progressView;
+			}
+		}
+		return searched;
+	}
+	
 	public void sort() {
 		for(ProgressView progress: progressList) {
 			this.remove(progress);

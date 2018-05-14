@@ -1,20 +1,28 @@
 package main;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Properties;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Properties;
 
 public class EditTaskView extends JFrame {
 	private TaskView taskView;
@@ -36,17 +44,21 @@ public class EditTaskView extends JFrame {
 	JDatePickerImpl datePicker;
 	
 	private JLabel statusLabel;
-	private JTextArea statusInput;
+//	private JTextArea statusInput;
+	private JComboBox<String> statusInput;
 	private JButton editButton;
 	private JButton exitButton;
 	
+	private ProjectView projectView;
+	
 	public EditTaskView(TaskView taskView) {
 		this.taskView = taskView;
+		this.projectView = (ProjectView) taskView.getParent().getParent().getParent();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		optionPanel = new JPanel();
-		optionPanel.setLayout(new GridLayout(6,2));
+		optionPanel.setLayout(new GridLayout(5,2));
 		
 		Border border = BorderFactory.createEtchedBorder();
 		
@@ -116,11 +128,17 @@ public class EditTaskView extends JFrame {
 		//TODO Fix status change for TaskView
 		// Make statusInput a combobox that lists all of the available progressViews
 		// Make it so that it will remove the taskView from the current progressView and add it to the new one
-		statusLabel = new JLabel("Status: ");
+		statusLabel = new JLabel("Progress: ");
 		statusLabel.setBorder(border);
 		optionPanel.add(statusLabel);
 		
-		statusInput = new JTextArea(taskView.getModel().getStatus());
+//		statusInput = new JTextArea(taskView.getModel().getStatus());
+		statusInput = new JComboBox<String>();
+		statusInput.setModel(new DefaultComboBoxModel<String>());
+		for(ProgressView progressView: projectView.getProgressList()) {
+			statusInput.addItem(progressView.getModel().getStatus());
+		}
+		statusInput.validate();
 		statusInput.setBorder(border);
 		optionPanel.add(statusInput);
 		
@@ -176,8 +194,12 @@ public class EditTaskView extends JFrame {
 		taskView.getModel().setDescription(descriptionInput.getText());
 		// Date
 		taskView.getModel().setDate(getDate());
+		
 		// Status
-		taskView.getModel().setStatus(statusInput.getText());
+		projectView.findProgress((String) statusInput.getSelectedItem()).addTask(taskView.getModel());
+		
+		
+		((ProgressView) taskView.getParent().getParent()).removeTask(taskView);
 		
 		// Edit View
 		taskView.setData();
@@ -190,9 +212,9 @@ public class EditTaskView extends JFrame {
 	}
 	
 //	 Main test
-	public static void main(String[] args) throws BadLocationException {
-		TaskModel testModel = new TaskModel("Name test", "Description test", Calendar.getInstance(), "Status test");
-		TaskView testView = new TaskView(testModel);
-		EditTaskView editView = new EditTaskView(testView);
-	}
+//	public static void main(String[] args) throws BadLocationException {
+//		TaskModel testModel = new TaskModel("Name test", "Description test", Calendar.getInstance(), "Status test");
+//		TaskView testView = new TaskView(testModel);
+//		EditTaskView editView = new EditTaskView(testView);
+//	}
 }

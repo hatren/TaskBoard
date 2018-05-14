@@ -20,6 +20,7 @@ import javax.swing.text.*;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
 public class TaskView extends JPanel implements Comparable<TaskView>{
 	// Variables
 	private TaskModel model;
