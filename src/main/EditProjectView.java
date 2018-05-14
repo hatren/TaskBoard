@@ -88,7 +88,9 @@ public class EditProjectView extends JFrame {
 		progressListModel.set(progressListModel.indexOf(arg0), arg1);
 		progressListModel.set(progressListModel.indexOf(arg1), arg0);
 		
-		
+//		int temp = arg1.getPriority();
+//		arg1.setPriority(arg0.getPriority());
+//		arg0.setPriority(temp);
 	}
 	
 	// raisePriority()
@@ -118,20 +120,8 @@ public class EditProjectView extends JFrame {
 	// exit()
 	public void exit() {
 		projectView.sort();
+		projectView.validate();
+		projectView.repaint();
 		dispose();
 	}
-	
-	public static void main(String[] args) {
-		ProgressModel test1 = new ProgressModel("test1", 0);
-		ProgressModel test2 = new ProgressModel("test2", 1);
-		ProgressModel test3 = new ProgressModel("test3", 2);
-		
-		ProjectModel model1 = new ProjectModel("wow");
-		model1.addProgress(test1);
-		model1.addProgress(test2);
-		model1.addProgress(test3);
-		ProjectView view1 = new ProjectView(model1);
-		EditProjectView view2 = new EditProjectView(view1);
-	}
-	
 }

@@ -116,6 +116,7 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Figure out how to delete this. Prompt user to confirm the deletion or cancel.
+				((ProjectView) getThis().getParent()).getModel().removeProgress(getModel());;
 				((ProjectView) getThis().getParent()).removeProgress(getThis());
 //				pan.setVisible(false);
 			}

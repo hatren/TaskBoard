@@ -52,6 +52,9 @@ public class ProjectModel implements Serializable{
 	
 	// Remove old Progress type
 	public void removeProgress(ProgressModel progress) {
+		for(int i = progressList.indexOf(progress); i<progressList.size(); i++) {
+			progressList.get(i).setPriority(progressList.get(i).getPriority() - 1);
+		}
 		progressList.remove(progress);
 		Collections.sort(progressList);
 	}
