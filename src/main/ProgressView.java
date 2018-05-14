@@ -127,6 +127,92 @@ public class ProgressView extends JPanel implements Comparable<ProgressView>{
 		this.setBorder(BorderFactory.createEtchedBorder());
 	}
 	
+	
+	public ProgressView(ProgressView prog) throws BadLocationException {
+		// Initialize
+		this.model = prog.getModel();
+		this.setLayout(new BorderLayout());
+		
+		// Add Status Text
+		status = new JLabel(prog.getModel().getStatus());
+		status.setHorizontalAlignment(JLabel.CENTER);
+		status.setVerticalAlignment(JLabel.CENTER);
+		status.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				/*counter++;
+				if(counter % 2 == 1) {
+					status.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+					getModel().setSelected(true);
+
+				} else {
+					status.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+					getModel().setSelected(false);
+				}
+				System.out.println("Mouseclick" + counter); */
+				
+			}
+		});
+		add(status, BorderLayout.NORTH);
+		
+		// Add TaskViews
+		taskList = new ArrayList<TaskView>();
+//		for(TaskModel task: this.model.getTaskList()) {
+//			addTask(task);
+//		}
+		/*
+		for(TaskModel task: this.model.getTaskList()) {
+			addTask(task);
+		}*/
+		taskPanel = new JPanel();
+		taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.Y_AXIS));
+		//taskPanel.setLayout(new FlowLayout());
+		this.add(taskPanel, BorderLayout.CENTER);
+		
+		taskList = new ArrayList<TaskView>();
+		for(int i = 0; i < this.model.getTaskList().size(); i++) {
+			TaskView taskView = new TaskView(this.model.getTaskList().get(i));
+			taskList.add(taskView);
+			taskPanel.add(taskView);
+		}
+		
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1,3));
+		buttonPanel.setBorder(BorderFactory.createEtchedBorder());
+		addTaskButton = new JButton("+");
+		addTaskButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreateTaskView createTaskView = new CreateTaskView(pan2);
+			}
+		});
+		buttonPanel.add(addTaskButton);
+		editProgressButton = new JButton("Edit");
+		editProgressButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				EditProgressView editProgressView = new EditProgressView(getThis());
+			}
+		});
+		buttonPanel.add(editProgressButton);
+		deleteProgressButton = new JButton("-");
+		deleteProgressButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Figure out how to delete this. Prompt user to confirm the deletion or cancel.
+				((ProjectView) getThis().getParent()).getModel().removeProgress(getModel());;
+				((ProjectView) getThis().getParent()).removeProgress(getThis());
+//				pan.setVisible(false);
+			}
+		});
+		buttonPanel.add(deleteProgressButton);
+		
+		
+		
+		add(buttonPanel, BorderLayout.SOUTH);
+		
+		// Test Border
+		this.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
 	public ProgressView getThis() {
 		return this;
 	}

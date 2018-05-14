@@ -111,6 +111,30 @@ public class TaskBoardView extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) projectDropDown.getSelectedItem();
 						currentProject = findProject(selected);
+						for(ProgressModel prog: currentProject.getModel().getProgressList()) {
+							ProgressView progv;
+							try {
+								progv = new ProgressView(prog);
+								add(progv);
+							} catch (BadLocationException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+							for(TaskModel tm: prog.getTaskList()) {
+								TaskView tv;
+								try {
+									tv = new TaskView(tm);
+									add(tv);
+								} catch (BadLocationException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+								
+								System.out.println(tm);
+							}
+						}
 			}
 		});
 		
@@ -168,16 +192,27 @@ public class TaskBoardView extends JPanel{
 					ArrayList<ProjectModel> pjm = loadTasks();
 					for(ProjectModel pm: pjm) {
 						addProject(pm);
+						ProjectView pv = new ProjectView(pm);
 						for(ProgressModel prog: pm.getProgressList()) {
+							ProgressView progv = new ProgressView(prog);
+							//pv.setLayout(new GridLayout(1, pm.getProgressList().size()));
+							add(progv);
+							
 							for(TaskModel tm: prog.getTaskList()) {
+								TaskView tv = new TaskView(tm);
+								progv.add(tv);
+								
 								System.out.println(tm);
 							}
 						}
 					}
+					validate();
 					} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();
-				}
-				
+				} catch (BadLocationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});
 		//load.setBounds(550, 50, 75, 50);
@@ -332,6 +367,9 @@ public class TaskBoardView extends JPanel{
 			this.remove(currentProject);
 		}
 		add(projectView, BorderLayout.CENTER);
+		for(ProgressModel pgv: model.getProgressList()) {
+			
+		}
 		currentProject = projectView;
 		projectDropDown.addItem(model.getName());
 		validate();
